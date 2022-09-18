@@ -29,3 +29,7 @@ changes in webpack.config
  ### 6
  npm i eslint
  npx eslint --init
+
+ ### 7
+
+ npm  i -D husky  lint-staged
