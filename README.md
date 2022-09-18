@@ -22,3 +22,10 @@ npm i -D @babel/core @babel/preset-env @babel/preset-react
 changes in webpack.config
 
  ### npm start
+
+ ### 5
+ npm i -D @pmmmwh/react-refresh-webpack-plugin react-refresh
+
+ ### 6
+ npm i eslint
+ npx eslint --init
