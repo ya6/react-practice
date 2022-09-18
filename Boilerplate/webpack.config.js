@@ -3,6 +3,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -18,6 +19,7 @@ const config = {
   devServer: {
     open: true,
     host: "localhost",
+    hot: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -57,11 +59,14 @@ const config = {
 
 module.exports = () => {
   if (isProduction) {
-    config.mode = "production";
+    config.mode = 'production'
+    config.devtool = 'source-map'
 
-    config.plugins.push(new MiniCssExtractPlugin());
+    config.plugins.push(new MiniCssExtractPlugin())
   } else {
-    config.mode = "development";
+    config.mode = 'development'
+    config.devtool = 'cheap-module-source-map'
+    config.plugins.push(new ReactRefreshWebpackPlugin())
   }
-  return config;
-};
+  return config
+}
