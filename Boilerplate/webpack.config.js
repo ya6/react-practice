@@ -13,7 +13,7 @@ const stylesHandler = isProduction
 const config = {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
   },
   devServer: {
     open: true,
@@ -21,7 +21,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: "./src/index.html",
     }),
 
     // Add your plugins here
@@ -50,6 +50,9 @@ const config = {
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  }
 };
 
 module.exports = () => {
