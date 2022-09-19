@@ -16,11 +16,13 @@ const config = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "build"),
+    publicPath: "/",
   },
   devServer: {
     open: true,
     host: "localhost",
     hot: true,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -62,11 +64,13 @@ module.exports = () => {
   if (isProduction) {
     config.mode = "production";
     config.devtool = "source-map";
+    config.devtool = "source-map";
 
     config.plugins.push(new MiniCssExtractPlugin());
   } else {
     config.mode = "development";
     config.devtool = "cheap-module-source-map";
+    config.homepage = "./";
     config.plugins.push(new ReactRefreshWebpackPlugin());
   }
   return config;

@@ -23,10 +23,16 @@
         "react"
     ],
     "rules": {
-        "linebreak-style": ["error", "windows"],
+        // "linebreak-style": ["error", "windows"],
+       " arrow-body-style": "off",
+        "react/function-component-definition": "off",
+        "react/react-in-jsx-scope": "off",
+        "linebreak-style": "off", 
         "no-unused-vars": "error",
         "semi": ["error", "always"],
         "quotes": ["error", "double"],
-        "react/jsx-filename-extension":"off"
+        "react/jsx-filename-extension":"off",
+        "camelcase": "off",
+        "import/prefer-default-export": "off"
     }
 }

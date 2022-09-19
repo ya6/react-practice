@@ -33,3 +33,7 @@ changes in webpack.config
  ### 7
 
  npm  i -D husky  lint-staged
+
+
+ -----
+  npm i react-router-dom@6
