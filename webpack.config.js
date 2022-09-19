@@ -70,7 +70,6 @@ module.exports = () => {
   } else {
     config.mode = "development";
     config.devtool = "cheap-module-source-map";
-    config.homepage = "./";
     config.plugins.push(new ReactRefreshWebpackPlugin());
   }
   return config;
