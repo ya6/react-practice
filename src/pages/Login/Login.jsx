@@ -1,17 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import useLoginUser from "../../helpers/hooks/useLoginUser";
+import UserContext from "../../helpers/UserContect";
 
 const Login = () => {
   const [visible, setViisible] = useState(false);
   const [credentials, setCredentials] = useState(null);
   const [serverAnswer] = useLoginUser(credentials);
   const [message, setMessage] = useState(null);
+  const userContext = useContext(UserContext);
+  console.log(userContext);
 
   // message hook
   useEffect(() => {
     if (serverAnswer) {
       setMessage(serverAnswer);
       console.log(message);
+      userContext.channgeUser(serverAnswer.name);
     }
   }, [serverAnswer, message]);
 
