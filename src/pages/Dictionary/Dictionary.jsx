@@ -1,11 +1,7 @@
-import { useState, useEffect } from "react";
-import FetchService from "../../services/FetchService";
+import useFirstWords from "../../helpers/hooks/useFirstWords";
 
 const Dictionary = () => {
-  const [firstWords, setfirstWords] = useState([]);
-  useEffect(() => {
-    FetchService.loadFirstWords(setfirstWords);
-  }, []);
+  const [firstWords] = useFirstWords();
 
   return (
     <div>
