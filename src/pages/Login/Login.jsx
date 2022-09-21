@@ -1,29 +1,54 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React from "react";
+import { useState, useEffect } from "react";
+import useLoginUser from "../../helpers/hooks/useLoginUser";
 
-const styles = {};
-styles.label = {
-  display: "flex", width: "90%", justifyContent: "space-between", border: "1px solid lightgray", margin: "0.5rem",
-};
-styles.block = { display: "block" };
-function Login() {
+const Login = () => {
+  const [visible, setViisible] = useState(false);
+  const [credentials, setCredentials] = useState(null);
+  const [serverAnswer] = useLoginUser(credentials);
+  const [message, setMessage] = useState(null);
+
+  // message hook
+  useEffect(() => {
+    if (serverAnswer) {
+      setMessage(serverAnswer);
+      console.log(message);
+    }
+  }, [serverAnswer, message]);
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formProps = Object.fromEntries(formData);
+    console.log(formProps);
+    setCredentials(formProps);
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={loginHandler}>
         <fieldset>
           <legend>Login</legend>
-          <label style={styles.label} htmlFor="">
-            name
-            <input name="name" type="text" />
-          </label>
-          <label style={styles.label} htmlFor="">
+          <div>
+            email
+            <input name="email" type="email" />
+          </div>
+          <div>
             password
-            <input name="password" type="text" />
-          </label>
-          <button style={styles.block} type="submit">login</button>
+            <input name="password" type={visible ? "text" : "password"} />
+          </div>
+          <div>
+            <input
+              onChange={() => {
+                setViisible(!visible);
+              }}
+              type="checkbox"
+            />
+            see password
+          </div>
+          <button type="submit">login</button>
         </fieldset>
       </form>
     </div>
   );
-}
+};
 export default Login;

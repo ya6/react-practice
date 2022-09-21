@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import useCreateUser from "../../helpers/hooks/userCreateUser";
+import useCreateUser from "../../helpers/hooks/useCreateUser";
 // import styles from "./styles.module.scss";
 
-function Signup() {
+const Signup = () => {
+  const [visible, setViisible] = useState(false);
   const [newUser, setNewUser] = useState(null);
   const [message, setMessage] = useState(null);
 
@@ -22,7 +23,6 @@ function Signup() {
     const formProps = Object.fromEntries(formData);
     setNewUser(formProps);
   };
-  const [visible, setViisible] = useState(false);
   return (
     <div>
       <form onSubmit={signupHandler}>
@@ -56,5 +56,5 @@ function Signup() {
       </form>
     </div>
   );
-}
+};
 export default Signup;

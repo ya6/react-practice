@@ -13,7 +13,7 @@ const Layout = () => (
       <Outlet />
     </main>
 
-    <footer>ya6 2021</footer>
+    <footer>ya6 2022</footer>
   </>
 );
 
