@@ -1,32 +1,38 @@
 import { urls } from "../config/config";
 
 export default class FetchService {
-  static serveUser = async (user, setStateFunc) => {
-    // to controller
-    let url;
-    if (user.name) {
-      url = `${urls.HOST}/${urls.PATH_NAME_USERS}`;
-    } else {
-      url = `${urls.HOST}/${urls.PATH_NAME_SIGNIN}`;
-    }
+  static createUser = async (user, setStateFunc) => {
+    const url = `${urls.HOST}/${urls.PATH_NAME_USERS}`;
+    const data = await FetchService.serveUser(url, user);
+    setStateFunc(data);
+  };
+
+  static loginUser = async (credentials, setStateFunc) => {
+    const url = `${urls.HOST}/${urls.PATH_NAME_SIGNIN}`;
+    const data = await FetchService.serveUser(url, credentials);
+    setStateFunc(data);
+  };
+
+  static serveUser = async (url, credentials) => {
     const options = {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(credentials),
     };
     const data = await FetchService.fetcher(url, options);
-    setStateFunc(data);
-
-    // return data;
+    if (typeof data === "string") {
+      return { message: data };
+    }
+    return data;
   };
 
   static loadFirstWords = async (setStateFunc) => {
     const url = `${urls.HOST}/${urls.PATH_NAME_WORDS}`;
     const data = await FetchService.fetcher(url);
-    // imitation of long load
+    // imitation of a long loading time
     // setTimeout(() => {
     //   setStateFunc(data);
     // }, 2000);
