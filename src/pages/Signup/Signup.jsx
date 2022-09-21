@@ -1,30 +1,29 @@
 import React, { useState } from "react";
 
-const styles = {};
-styles.label = {
-  display: "flex",
-  width: "90%",
-  justifyContent: "space-between",
-  border: "1px solid lightgray",
-  margin: "0.5rem",
-};
-styles.block = { display: "block" };
+// import styles from "./styles.module.scss";
+
 function Signup() {
+  const signupHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formProps = Object.fromEntries(formData);
+    console.log(formProps);
+  };
   const [visible, setViisible] = useState(false);
   return (
     <div>
-      <form>
+      <form onSubmit={signupHandler}>
         <fieldset>
           <legend>Signup</legend>
-          <label style={styles.label}>
+          <div>
             name
             <input name="name" type="text" />
-          </label>
-          <label style={styles.label} htmlFor="">
+          </div>
+          <div>
             password
             <input name="password" type={visible ? "text" : "password"} />
-          </label>
-          <label>
+          </div>
+          <div>
             <input
               onChange={() => {
                 setViisible(!visible);
@@ -32,8 +31,8 @@ function Signup() {
               type="checkbox"
             />
             see password
-          </label>
-          <button style={styles.block} type="submit">
+          </div>
+          <button type="submit">
             signup
           </button>
         </fieldset>

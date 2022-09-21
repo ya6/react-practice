@@ -58,18 +58,38 @@ const config = {
   resolve: {
     extensions: ["", ".js", ".jsx"],
   },
+  optimization: {
+    splitChunks: {
+
+      cacheGroups: {
+        vendor: {
+          name: "chunk-vendor",
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          chunks: "initial",
+        },
+        common: {
+          name: "chunk-ya6",
+          minSize: 1,
+          minChunks: 1,
+          priority: -20,
+          chunks: "initial",
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
 };
 
 module.exports = () => {
   if (isProduction) {
     config.mode = "production";
-    config.devtool = "source-map";
-    config.devtool = "source-map";
-
+    // config.devtool = "source-map";
     config.plugins.push(new MiniCssExtractPlugin());
   } else {
     config.mode = "development";
     config.devtool = "cheap-module-source-map";
+    config.output.publicPath = "/";
     config.plugins.push(new ReactRefreshWebpackPlugin());
   }
   return config;
