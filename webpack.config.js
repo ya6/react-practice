@@ -89,6 +89,7 @@ module.exports = () => {
   } else {
     config.mode = "development";
     config.devtool = "cheap-module-source-map";
+    config.devtool = "eval-cheap-module-source-map";
     config.output.publicPath = "/";
     config.plugins.push(new ReactRefreshWebpackPlugin());
   }

@@ -1,13 +1,29 @@
-import React, { useState } from "react";
-
+import { useState, useEffect } from "react";
+import FetchService from "../../services/FetchService";
 // import styles from "./styles.module.scss";
 
 function Signup() {
+  const [newUser, setNewUser] = useState(null);
+  const [serverAnswer, setServerAnswer] = useState(null);
+  const [message, setMessage] = useState(null);
+  useEffect(() => {
+    if (newUser) {
+      FetchService.serveUser(newUser, setServerAnswer);
+    }
+  }, [newUser]);
+  useEffect(() => {
+    if (serverAnswer) {
+      setMessage(serverAnswer);
+      console.log(message);
+    }
+  }, [serverAnswer, message]);
+
   const signupHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
-    console.log(formProps);
+    // console.log(formProps);
+    setNewUser(formProps);
   };
   const [visible, setViisible] = useState(false);
   return (
@@ -18,6 +34,10 @@ function Signup() {
           <div>
             name
             <input name="name" type="text" />
+          </div>
+          <div>
+            email
+            <input name="email" type="email" />
           </div>
           <div>
             password
