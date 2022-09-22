@@ -1,21 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import useCreateUser from "../../helpers/hooks/useCreateUser";
 // import styles from "./styles.module.scss";
+import DataContect from "../../helpers/DataContect";
 
 const Signup = () => {
   const [visible, setViisible] = useState(false);
   const [newUser, setNewUser] = useState(null);
-  const [message, setMessage] = useState(null);
+
+  const [isRedirect, setIsRedirect] = useState(false);
+  const dataContext = useContext(DataContect);
 
   const [serverAnswer] = useCreateUser(newUser);
 
   // message hook
-  useEffect(() => {
-    if (serverAnswer) {
-      setMessage(serverAnswer);
-      console.log(message);
-    }
-  }, [serverAnswer, message]);
+  useEffect(
+    () => {
+      if (serverAnswer) {
+        if (serverAnswer.name) {
+          dataContext.changeMessage("user created");
+          setIsRedirect(true);
+        } else {
+          dataContext.changeMessage(serverAnswer.serverMessage || "ups");
+        }
+      }
+    },
+    [serverAnswer],
+  );
 
   const signupHandler = (e) => {
     e.preventDefault();
@@ -54,6 +65,7 @@ const Signup = () => {
           </button>
         </fieldset>
       </form>
+      {isRedirect && <Navigate replace to="/login" />}
     </div>
   );
 };

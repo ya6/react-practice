@@ -24,7 +24,7 @@ export default class FetchService {
     };
     const data = await FetchService.fetcher(url, options);
     if (typeof data === "string") {
-      return { message: data };
+      return { serverMessage: data };
     }
     return data;
   };

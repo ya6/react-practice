@@ -1,31 +1,32 @@
 import { useState, useEffect, useContext } from "react";
 import useLoginUser from "../../helpers/hooks/useLoginUser";
-import UserContext from "../../helpers/UserContect";
+import DataContect from "../../helpers/DataContect";
 
 const Login = () => {
   const [visible, setViisible] = useState(false);
   const [credentials, setCredentials] = useState(null);
   const [serverAnswer] = useLoginUser(credentials);
-  const [message, setMessage] = useState(null);
-  const userContext = useContext(UserContext);
-  console.log("userContext-->", userContext);
+
+  const dataContext = useContext(DataContect);
 
   // message hook
   useEffect(() => {
     if (serverAnswer) {
-      setMessage(serverAnswer);
-      console.log(message);
       if (serverAnswer.name) {
-        userContext.channgeUser(serverAnswer.name);
-      } else { userContext.channgeUser("triedGuest"); }
+        dataContext.changeUser(serverAnswer.name);
+        dataContext.changeMessage("user created");
+      } else {
+        dataContext.changeUser("guest");
+        dataContext.changeMessage(serverAnswer.serverMessage || "ups");
+      }
     }
-  }, [serverAnswer, message]);
+  }, [serverAnswer]);
 
   const loginHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
-    console.log(formProps);
+    // console.log(formProps);
     setCredentials(formProps);
   };
 

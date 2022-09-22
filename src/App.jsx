@@ -1,24 +1,29 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useMemo } from "react";
 import Layout from "./components/Layout/Layout";
-import UserContext from "./helpers/UserContect";
+import DataContext from "./helpers/DataContect";
 
 const App = () => {
-  console.log("--App--");
   const [user, setUser] = useState("guest");
+  const [message, setMessage] = useState(null);
+  console.log("--App-- message-->", message);
   const context = useMemo(
     () => ({
-      name: user,
-      channgeUser: (newUser) => {
+      user,
+      changeUser: (newUser) => {
         setUser(newUser);
       },
+      message,
+      changeMessage: (mess) => {
+        setMessage(mess);
+      },
     }),
-    [user],
+    [user, message],
   );
   return (
-    <UserContext.Provider value={context}>
+    <DataContext.Provider value={context}>
       <Layout />
-    </UserContext.Provider>
+    </DataContext.Provider>
   );
 };
 export default App;
