@@ -1,5 +1,18 @@
-.nav {
-  width: 50%;
+.layout {
+  min-height: 100vh;
+}
+
+.header {
+  background-color: rgba(4, 4, 50, 0.844);
   display: flex;
   justify-content: space-around;
+}
+
+.nav {
+  color: wheat;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
 }

@@ -60,6 +60,7 @@ const config = {
     extensions: ["", ".js", ".jsx"],
   },
   optimization: {
+
     splitChunks: {
 
       cacheGroups: {

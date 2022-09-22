@@ -1,22 +1,28 @@
 import { Outlet, NavLink } from "react-router-dom";
+import "antd/dist/antd.css";
+import { Layout as LayoutAnt } from "antd";
 import styles from "./styles.module.scss";
 
+const {
+  Header, Footer, Sider, Content,
+} = LayoutAnt;
+
 const Layout = () => (
-  <>
-    <header className={styles.nav}>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="dictionary">Dictionary</NavLink>
-      <NavLink to="statistics">Statistics</NavLink>
-      <NavLink to="login">Login</NavLink>
-      <NavLink to="signup">Signup</NavLink>
-    </header>
+  <LayoutAnt className={styles.layout}>
+    <Header className={styles.header}>
+      <NavLink className={styles.nav} to="/">Home</NavLink>
+      <NavLink className={styles.nav} to="dictionary">Dictionary</NavLink>
+      <NavLink className={styles.nav} to="statistics">Statistics</NavLink>
+      <NavLink className={styles.nav} to="login">Login</NavLink>
+      <NavLink className={styles.nav} to="signup">Signup</NavLink>
+    </Header>
 
-    <main>
+    <Content>
       <Outlet />
-    </main>
+    </Content>
 
-    <footer>ya6 2022</footer>
-  </>
+    <Footer className={styles.footer}>ya6 2022</Footer>
+  </LayoutAnt>
 );
 
 export default Layout;
