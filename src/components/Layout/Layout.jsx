@@ -26,10 +26,14 @@ const Layout = () => {
 
   useEffect(() => {
     if (dataContext.message) {
-      message.info({
-        content: dataContext.message,
-        className: styles.message,
-      });
+      setTimeout(() => {
+        message.info({
+          content: dataContext.message,
+          style: {
+            marginTop: "40vh",
+          },
+        });
+      }, 1500);
     }
 
     return () => {
@@ -49,6 +53,7 @@ const Layout = () => {
   useEffect(() => {
     if (logout) {
       dataContext.changeUser("guest");
+      dataContext.changeMessage("You are logged out");
     }
     return () => {
       setLogout(false);
