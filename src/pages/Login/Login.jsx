@@ -15,7 +15,9 @@ const Login = () => {
     if (serverAnswer) {
       setMessage(serverAnswer);
       console.log(message);
-      userContext.channgeUser(serverAnswer.name);
+      if (serverAnswer.name) {
+        userContext.channgeUser(serverAnswer.name);
+      } else { userContext.channgeUser("triedGuest"); }
     }
   }, [serverAnswer, message]);
 
