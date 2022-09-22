@@ -14,7 +14,7 @@ const Login = () => {
     if (serverAnswer) {
       if (serverAnswer.name) {
         dataContext.changeUser(serverAnswer.name);
-        dataContext.changeMessage("user created");
+        dataContext.changeMessage("Нou are logged in");
       } else {
         dataContext.changeUser("guest");
         dataContext.changeMessage(serverAnswer.serverMessage || "ups");

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useCreateUser from "../../helpers/hooks/useCreateUser";
 // import styles from "./styles.module.scss";
 import DataContect from "../../helpers/DataContect";
@@ -7,9 +7,10 @@ import DataContect from "../../helpers/DataContect";
 const Signup = () => {
   const [visible, setViisible] = useState(false);
   const [newUser, setNewUser] = useState(null);
-
   const [isRedirect, setIsRedirect] = useState(false);
+
   const dataContext = useContext(DataContect);
+  const navigate = useNavigate();
 
   const [serverAnswer] = useCreateUser(newUser);
 
@@ -27,6 +28,12 @@ const Signup = () => {
     },
     [serverAnswer],
   );
+
+  useEffect(() => {
+    if (isRedirect) {
+      navigate("/login");
+    }
+  }, [isRedirect]);
 
   const signupHandler = (e) => {
     e.preventDefault();
@@ -65,7 +72,6 @@ const Signup = () => {
           </button>
         </fieldset>
       </form>
-      {isRedirect && <Navigate replace to="/login" />}
     </div>
   );
 };
