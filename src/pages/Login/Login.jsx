@@ -8,7 +8,7 @@ const Login = () => {
   const [serverAnswer] = useLoginUser(credentials);
   const [message, setMessage] = useState(null);
   const userContext = useContext(UserContext);
-  console.log(userContext);
+  console.log("userContext-->", userContext);
 
   // message hook
   useEffect(() => {

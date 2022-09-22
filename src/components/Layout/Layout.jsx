@@ -1,10 +1,12 @@
 import { Outlet, NavLink } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 const Layout = () => (
   <>
-    <header>
+    <header className={styles.nav}>
       <NavLink to="/">Home</NavLink>
       <NavLink to="dictionary">Dictionary</NavLink>
+      <NavLink to="statistics">Statistics</NavLink>
       <NavLink to="login">Login</NavLink>
       <NavLink to="signup">Signup</NavLink>
     </header>
