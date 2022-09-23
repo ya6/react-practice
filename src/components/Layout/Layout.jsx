@@ -22,22 +22,12 @@ const Layout = () => {
 
   useEffect(() => {
     if (dataContext.message) {
-      // setTimeout(() => {
-      //   message.info({
-      //     content: dataContext.message,
-      //     style: {
-      //       marginTop: "40vh",
-      //     },
-      //   });
-      // }, 100);
-
       message.info({
         content: dataContext.message,
         style: {
           position: "fixed",
-          top: "40%",
-          left: " 70%",
-
+          top: "10%",
+          right: "1%",
         },
       });
     }
@@ -84,16 +74,20 @@ const Layout = () => {
         <NavLink className={styles.nav} to="signup">
           Signup
         </NavLink>
-        <div>
-          {dataContext.user === "guest" ? (
-            <Tooltip title="login">
-              <Button style={{ background: "gray" }} type="primary" shape="circle" icon={<LoginOutlined />} onClick={() => setIsRedirect(true)} />
-            </Tooltip>
-          ) : (
-            <Tooltip title="logout">
-              <Button type="primary" shape="circle" icon={<LogoutOutlined />} onClick={() => setLogout(true)} />
-            </Tooltip>
-          )}
+        <div style={{ display: "flex" }}>
+
+          <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${dataContext.user}`}</div>
+          <div>
+            {dataContext.user === "guest" ? (
+              <Tooltip title="login">
+                <Button style={{ background: "gray" }} type="primary" shape="circle" icon={<LoginOutlined />} onClick={() => setIsRedirect(true)} />
+              </Tooltip>
+            ) : (
+              <Tooltip title="logout">
+                <Button type="primary" shape="circle" icon={<LogoutOutlined />} onClick={() => setLogout(true)} />
+              </Tooltip>
+            )}
+          </div>
         </div>
       </Header>
 
