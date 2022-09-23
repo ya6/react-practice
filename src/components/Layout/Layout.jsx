@@ -1,22 +1,18 @@
 /* eslint-disable import/order */
 import { useContext, useEffect, useState } from "react";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import DataContext from "../../helpers/DataContect";
 
-import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import "antd/dist/antd.css";
 import {
   Layout as LayoutAnt, Button, Tooltip, message,
 } from "antd";
-import {
-  LoginOutlined,
-  LogoutOutlined,
-} from "@ant-design/icons";
+
+import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 
 import styles from "./styles.module.scss";
 
-const {
-  Header, Footer, Sider, Content,
-} = LayoutAnt;
+const { Header, Footer, Content } = LayoutAnt;
 
 const Layout = () => {
   const [isRedirect, setIsRedirect] = useState(false);
@@ -26,14 +22,24 @@ const Layout = () => {
 
   useEffect(() => {
     if (dataContext.message) {
-      setTimeout(() => {
-        message.info({
-          content: dataContext.message,
-          style: {
-            marginTop: "40vh",
-          },
-        });
-      }, 1500);
+      // setTimeout(() => {
+      //   message.info({
+      //     content: dataContext.message,
+      //     style: {
+      //       marginTop: "40vh",
+      //     },
+      //   });
+      // }, 100);
+
+      message.info({
+        content: dataContext.message,
+        style: {
+          position: "fixed",
+          top: "40%",
+          left: " 70%",
+
+        },
+      });
     }
 
     return () => {
@@ -61,14 +67,23 @@ const Layout = () => {
   }, [logout]);
 
   return (
-
     <LayoutAnt className={styles.layout}>
       <Header className={styles.header}>
-        <NavLink className={styles.nav} to="/">Home</NavLink>
-        <NavLink className={styles.nav} to="dictionary">Dictionary</NavLink>
-        <NavLink className={styles.nav} to="statistics">Statistics</NavLink>
-        <NavLink className={styles.nav} to="login">Login</NavLink>
-        <NavLink className={styles.nav} to="signup">Signup</NavLink>
+        <NavLink className={styles.nav} to="/">
+          Home
+        </NavLink>
+        <NavLink className={styles.nav} to="dictionary">
+          Dictionary
+        </NavLink>
+        <NavLink className={styles.nav} to="statistics">
+          Statistics
+        </NavLink>
+        <NavLink className={styles.nav} to="login">
+          Login
+        </NavLink>
+        <NavLink className={styles.nav} to="signup">
+          Signup
+        </NavLink>
         <div>
           {dataContext.user === "guest" ? (
             <Tooltip title="login">
@@ -76,25 +91,17 @@ const Layout = () => {
             </Tooltip>
           ) : (
             <Tooltip title="logout">
-              <Button
-                type="primary"
-                shape="circle"
-                icon={<LogoutOutlined />}
-                onClick={() => setLogout(true)}
-              />
-              {/* <Button type="primary" shape="circle" icon={<LogoutOutlined />} /> */}
+              <Button type="primary" shape="circle" icon={<LogoutOutlined />} onClick={() => setLogout(true)} />
             </Tooltip>
           )}
-
         </div>
       </Header>
 
-      <Content>
+      <Content className={styles.content}>
         <Outlet />
       </Content>
 
       <Footer className={styles.footer}>ya6 2022</Footer>
-
     </LayoutAnt>
   );
 };

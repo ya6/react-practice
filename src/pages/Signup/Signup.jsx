@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import useCreateUser from "../../helpers/hooks/useCreateUser";
-// import styles from "./styles.module.scss";
 import DataContect from "../../helpers/DataContect";
 
 const Signup = () => {
@@ -40,6 +39,7 @@ const Signup = () => {
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
     setNewUser(formProps);
+    dataContext.changeMessage("processing...");
   };
   return (
     <div>
