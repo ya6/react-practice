@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import DataContext from "../../helpers/DataContect";
 
+import { route } from "../../config/config";
+
 import "antd/dist/antd.css";
 import {
   Layout as LayoutAnt, Button, Tooltip, message,
@@ -62,17 +64,20 @@ const Layout = () => {
         <NavLink className={styles.nav} to="/">
           Home
         </NavLink>
-        <NavLink className={styles.nav} to="dictionary">
+        <NavLink className={styles.nav} to={route.DICTIONARY}>
           Dictionary
         </NavLink>
-        <NavLink className={styles.nav} to="statistics">
+        <NavLink className={styles.nav} to={route.STATISTICS}>
           Statistics
         </NavLink>
-        <NavLink className={styles.nav} to="login">
+        <NavLink className={styles.nav} to={route.LOGIN}>
           Login
         </NavLink>
-        <NavLink className={styles.nav} to="signup">
-          Signup
+        <NavLink className={styles.nav} to={route.REGISTER}>
+          Register
+        </NavLink>
+        <NavLink className={styles.nav} to={route.SIININ}>
+          Sign in
         </NavLink>
         <div style={{ display: "flex" }}>
 
