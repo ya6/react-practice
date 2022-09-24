@@ -16,6 +16,7 @@ const Login = () => {
       if (serverAnswer.name) {
         dataContext.changeUser(serverAnswer.name);
         dataContext.changeMessage("Нou are logged in");
+        dataContext.changeProcessing(false);  
       } else {
         dataContext.changeUser("guest");
         dataContext.changeMessage(serverAnswer.serverMessage || "ups");
@@ -25,6 +26,7 @@ const Login = () => {
 
   const loginHandler = (values) => {
         dataContext.changeMessage("processing...");
+        dataContext.changeProcessing(true);  
     setCredentials(values);
   };
 

@@ -6,6 +6,7 @@ import DataContext from "./helpers/DataContect";
 const App = () => {
   const [user, setUser] = useState("guest");
   const [message, setMessage] = useState(null);
+  const [processing, setProcessing] = useState(false);
   const context = useMemo(
     () => ({
       user,
@@ -16,8 +17,12 @@ const App = () => {
       changeMessage: (mess) => {
         setMessage(mess);
       },
+      processing,
+      changeProcessing: (bool) => {
+        setProcessing(bool);
+      },
     }),
-    [user, message],
+    [user, message, processing],
   );
   return (
     <DataContext.Provider value={context}>

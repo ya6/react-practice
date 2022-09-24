@@ -17,7 +17,7 @@ const Register = () => {
   // TODO message hook
   useEffect(() => {
     if (serverAnswer) {
-    
+      dataContext.changeProcessing(false);  
       if (serverAnswer.email) {
         dataContext.changeMessage("user created");
         setIsRedirect(true);
@@ -36,6 +36,7 @@ const Register = () => {
   const signupHandler = (values) => {
     setNewUser(values);
     dataContext.changeMessage("processing...");
+    dataContext.changeProcessing(true);  
   };
   return <RegisterBasic signupHandler={signupHandler} />;
 };

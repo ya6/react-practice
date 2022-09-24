@@ -6,24 +6,20 @@ const SigninTabs = ({ children }) => {
   return (
     <Card style={{ margin: "3rem auto", width: "500px" }}>
       <div style={{ display: "flex" }}>
-        <Button
-          block
-          style={{ padding: "0 1rem", flex: 1 }}
-          onClick={() => {
-            setActiveIndex(0);
-          }}
-        >
-          Login
-        </Button>
-        <Button
-          block
-          style={{ padding: "0 1rem", flex: 1 }}
-          onClick={() => {
-            setActiveIndex(1);
-          }}
-        >
-          Register
-        </Button>
+        {children.map((child, idx) => {
+                 return (
+            <Button
+              key={idx}
+              block
+              style={{  flex: 1 }}
+              onClick={() => {
+                setActiveIndex(idx);
+              }}
+            >
+             {child.props.title}
+            </Button>
+          );
+        })}
       </div>
       {children[activIndex]}
     </Card>
