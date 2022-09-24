@@ -10,7 +10,7 @@ import {
   Layout as LayoutAnt, Button, Tooltip, message,
 } from "antd";
 
-import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
+import { LoginOutlined, LogoutOutlined,  SyncOutlined } from "@ant-design/icons";
 
 import styles from "./styles.module.scss";
 
@@ -79,11 +79,11 @@ const Layout = () => {
           <div>
             {dataContext.user === "guest" ? (
               <Tooltip title="login">
-                <Button style={{ background: "gray" }} type="primary" shape="circle" icon={<LoginOutlined />} onClick={() => setIsRedirect(true)} />
+                <Button style={{ background: "gray" }} type="primary" shape="circle"  icon={dataContext.processing ?  <SyncOutlined spin /> : <LoginOutlined />} onClick={() => setIsRedirect(true)} />
               </Tooltip>
             ) : (
               <Tooltip title="logout">
-                <Button type="primary" shape="circle" icon={<LogoutOutlined />} onClick={() => setLogout(true)} />
+                <Button type="primary" shape="circle"  icon={dataContext.processing ?  <SyncOutlined spin /> : <LogoutOutlined />} onClick={() => setLogout(true)} />
               </Tooltip>
             )}
           </div>

@@ -5,8 +5,8 @@ import Register from "../../components/Custom/Register/Register";
 const Signin = () => {
   return (
     <SigninTabs>
-      <Login />
-      <Register />
+      <Login  title = "Login"/>
+      <Register  title = "Registr"/>
     </SigninTabs>
   );
 };
