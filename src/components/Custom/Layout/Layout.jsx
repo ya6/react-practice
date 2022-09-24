@@ -1,9 +1,9 @@
 /* eslint-disable import/order */
 import { useContext, useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
-import DataContext from "../../helpers/DataContect";
+import DataContext from "../../../helpers/DataContect";
 
-import { route } from "../../config/config";
+import { route } from "../../../config/config";
 
 import "antd/dist/antd.css";
 import {
