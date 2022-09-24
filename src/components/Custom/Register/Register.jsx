@@ -1,17 +1,19 @@
 import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import useCreateUser from "../../../helpers/hooks/useCreateUser";
 import DataContect from "../../../helpers/DataContect";
+import TabsContext from "../../../helpers/TabsContect";
 import RegisterBasic from "../../Basic/Register/Register";
-import { route } from "../../../config/config";
+
 
 const Register = () => {
   const [newUser, setNewUser] = useState(null);
   const [isRedirect, setIsRedirect] = useState(false);
 
   const dataContext = useContext(DataContect);
-  const navigate = useNavigate();
 
+
+  const {setActiveIndex} = useContext(TabsContext);
+  
   const [serverAnswer] = useCreateUser(newUser);
 
   // TODO message hook
@@ -29,7 +31,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isRedirect) {
-      navigate("/signin");
+      setActiveIndex(0)
     }
   }, [isRedirect]);
 
