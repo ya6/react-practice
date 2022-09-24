@@ -22,7 +22,7 @@ const SigninTabs = ({ children }) => {
             setActiveIndex(1);
           }}
         >
-          Register{" "}
+          Register
         </Button>
       </div>
       {children[activIndex]}

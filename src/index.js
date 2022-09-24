@@ -22,7 +22,7 @@ root.render(
           <Route path={route.STATISTICS} element={<Statistics />} />
           <Route path={route.LOGIN} element={<Login />} />
           <Route path={route.REGISTER} element={<Register />} />
-          <Route path={route.SIININ} element={<Signin />} />
+          <Route path={route.SIGNIN} element={<Signin />} />
         </Route>
       </Routes>
     </BrowserRouter>

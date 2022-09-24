@@ -3,23 +3,23 @@ import { Button, Checkbox, Form, Input } from "antd";
 
 import styles from "./styles.module.scss";
 
-const Login = () => {
+const Login = ({ loginHandler }) => {
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    loginHandler(values);
   };
 
   return (
     <div className={styles.form}>
-      <h2>Log in form</h2>
+      <h2>Login form</h2>
 
       <Form
-        name="normal_login"
+        name="basic"
         initialValues={{
           remember: false,
         }}
         onFinish={onFinish}
       >
-         <Form.Item
+        <Form.Item
           name="email"
           rules={[
             {
@@ -40,12 +40,13 @@ const Login = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Password!",
+              message: "Please input your password!",
             },
           ]}
         >
-          <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password" />
+          <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password" />
         </Form.Item>
+
         <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>

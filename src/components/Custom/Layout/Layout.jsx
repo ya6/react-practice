@@ -41,7 +41,7 @@ const Layout = () => {
 
   useEffect(() => {
     if (isRedirect) {
-      navigate("/login");
+      navigate(route.SIGNIN);
     }
     return () => {
       setIsRedirect(false);
@@ -70,13 +70,7 @@ const Layout = () => {
         <NavLink className={styles.nav} to={route.STATISTICS}>
           Statistics
         </NavLink>
-        <NavLink className={styles.nav} to={route.LOGIN}>
-          Login
-        </NavLink>
-        <NavLink className={styles.nav} to={route.REGISTER}>
-          Register
-        </NavLink>
-        <NavLink className={styles.nav} to={route.SIININ}>
+        <NavLink className={styles.nav} to={route.SIGNIN}>
           Sign in
         </NavLink>
         <div style={{ display: "flex" }}>

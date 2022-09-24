@@ -8,7 +8,7 @@ export const route = {
   HOME: "/",
   DICTIONARY: "dictionary",
   STATISTICS: "statistics",
-  SIININ: "signin",
+  SIGNIN: "signin",
   LOGIN: "login",
   REGISTER: "register",
 };

@@ -1,7 +1,6 @@
-import SigninTabs from '../../components/Custom/SininTabs/SigninTabs'
-import Login from "../../components/Basic/Login/Login";
-import Register from "../../components/Basic/Registr/Registr";
-
+import SigninTabs from "../../components/Custom/SigninTabs/SigninTabs";
+import Login from "../../components/Custom/Login/Login";
+import Register from "../../components/Custom/Register/Register";
 
 const Signin = () => {
   return (

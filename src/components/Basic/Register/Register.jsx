@@ -3,9 +3,11 @@ import { Button, Form, Input } from "antd";
 
 import styles from "./styles.module.scss";
 
-const Register = () => {
+const Register = ({ signupHandler }) => {
+ 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  
+    signupHandler(values)
   };
 
   return (
@@ -13,14 +15,14 @@ const Register = () => {
       <h2>Register form</h2>
 
       <Form
-        name="normal_login"
+        name="basic"
         initialValues={{
           remember: false,
         }}
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="name"
           rules={[
             {
               required: true,
@@ -56,7 +58,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
+          <Input.Password prefix={<LockOutlined />} type="password" placeholder="Password" />
         </Form.Item>
 
         <Form.Item>
