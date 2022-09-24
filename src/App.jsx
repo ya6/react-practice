@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import { useState, useMemo } from "react";
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/Custom/Layout/Layout";
 import DataContext from "./helpers/DataContect";
 
 const App = () => {

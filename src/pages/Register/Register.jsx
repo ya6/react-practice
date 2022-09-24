@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useCreateUser from "../../helpers/hooks/useCreateUser";
 import DataContect from "../../helpers/DataContect";
 
-const Signup = () => {
+const Register = () => {
   const [visible, setViisible] = useState(false);
   const [newUser, setNewUser] = useState(null);
   const [isRedirect, setIsRedirect] = useState(false);
@@ -45,7 +45,7 @@ const Signup = () => {
     <div>
       <form onSubmit={signupHandler}>
         <fieldset>
-          <legend>Signup</legend>
+          <legend>Register</legend>
           <div>
             name
             <input name="name" type="text" />
@@ -75,4 +75,4 @@ const Signup = () => {
     </div>
   );
 };
-export default Signup;
+export default Register;

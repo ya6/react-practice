@@ -5,7 +5,7 @@ import DataContext from "../../helpers/DataContect";
 const Statistics = () => {
   const dataContext = useContext(DataContext);
   const [firstWords] = useFirstWords();
-  console.log("--Statistics-- user->", dataContext.user);
+
   return (
     <div>
       <h2>Statistics</h2>
