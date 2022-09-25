@@ -20,3 +20,7 @@ export const levels = {
   "Hard": 4,
   "Extra Hard:": 5
 };
+export const dictionary ={
+  PAGE_SIZE : 20,
+  WORDS_IN_CATEGORY : 600
+}
