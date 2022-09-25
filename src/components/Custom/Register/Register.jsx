@@ -19,12 +19,12 @@ const Register = () => {
   // TODO message hook
   useEffect(() => {
     if (serverAnswer) {
-      dataContext.changeProcessing(false);  
+      dataContext.setProcessing(false);  
       if (serverAnswer.email) {
-        dataContext.changeMessage("user created");
+        dataContext.setMessage("user created");
         setIsRedirect(true);
       } else {
-        dataContext.changeMessage(serverAnswer.serverMessage || "ups");
+        dataContext.setMessage(serverAnswer.serverMessage || "ups");
       }
     }
   }, [serverAnswer]);
@@ -37,8 +37,8 @@ const Register = () => {
 
   const signupHandler = (values) => {
     setNewUser(values);
-    dataContext.changeMessage("processing...");
-    dataContext.changeProcessing(true);  
+    dataContext.setMessage("processing...");
+    dataContext.setProcessing(true);  
   };
   return <RegisterBasic signupHandler={signupHandler} />;
 };

@@ -7,22 +7,31 @@ const App = () => {
   const [user, setUser] = useState("guest");
   const [message, setMessage] = useState(null);
   const [processing, setProcessing] = useState(false);
+  
   const context = useMemo(
     () => ({
       user,
-      changeUser: (newUser) => {
-        setUser(newUser);
-      },
+      setUser,
+
       message,
-      changeMessage: (mess) => {
-        setMessage(mess);
-      },
+      setMessage,
+
       processing,
-      changeProcessing: (bool) => {
-        setProcessing(bool);
-      },
+      setProcessing,
+
+      // group,
+      // setGroup,
+
+      // page,
+      // setPage,
+
+      // pageOfWords,
+      // setPageOfWords
+
     }),
-    [user, message, processing],
+    [user, message, processing,
+      //  group, page, pageOfWords
+      ]
   );
   return (
     <DataContext.Provider value={context}>

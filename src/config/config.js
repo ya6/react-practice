@@ -12,3 +12,15 @@ export const route = {
   LOGIN: "login",
   REGISTER: "register",
 };
+export const levels = {
+  "Extra Easy": 0,
+  "Easy": 1,
+   "Medium": 2 ,
+  "Medium+": 3,
+  "Hard": 4,
+  "Extra Hard:": 5
+};
+export const dictionary ={
+  PAGE_SIZE : 20,
+  WORDS_IN_CATEGORY : 600
+}
