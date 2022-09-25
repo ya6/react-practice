@@ -14,19 +14,19 @@ const Login = () => {
   useEffect(() => {
     if (serverAnswer) {
       if (serverAnswer.name) {
-        dataContext.changeUser(serverAnswer.name);
-        dataContext.changeMessage("Нou are logged in");
-        dataContext.changeProcessing(false);  
+        dataContext.setUser(serverAnswer.name);
+        dataContext.setMessage("Нou are logged in");
+        dataContext.setProcessing(false);  
       } else {
-        dataContext.changeUser("guest");
-        dataContext.changeMessage(serverAnswer.serverMessage || "ups");
+        dataContext.setUser("guest");
+        dataContext.setMessage(serverAnswer.serverMessage || "ups");
       }
     }
   }, [serverAnswer]);
 
   const loginHandler = (values) => {
-        dataContext.changeMessage("processing...");
-        dataContext.changeProcessing(true);  
+        dataContext.setMessage("processing...");
+        dataContext.setProcessing(true);  
     setCredentials(values);
   };
 

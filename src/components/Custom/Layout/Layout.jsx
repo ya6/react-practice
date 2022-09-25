@@ -35,7 +35,7 @@ const Layout = () => {
     }
 
     return () => {
-      dataContext.changeMessage(null);
+      dataContext.setMessage(null);
     };
   }, [dataContext]);
 
@@ -50,8 +50,8 @@ const Layout = () => {
 
   useEffect(() => {
     if (logout) {
-      dataContext.changeUser("guest");
-      dataContext.changeMessage("You are logged out");
+      dataContext.setUser("guest");
+      dataContext.setMessage("You are logged out");
     }
     return () => {
       setLogout(false);

@@ -40,6 +40,12 @@ export default class FetchService {
     setStateFunc(data);
   };
 
+  static loadPageOfWords = async (group = 0, page = 0, setStateFunc) => {
+    const url = `${urls.HOST}/${urls.PATH_NAME_WORDS}?group=${group}&page=${page}`;
+    const data = await FetchService.fetcher(url);
+    setStateFunc(data);
+  };
+
   static fetcher = async (url, options = {}) => {
     let data;
     try {
