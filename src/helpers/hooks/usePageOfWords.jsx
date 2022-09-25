@@ -6,6 +6,9 @@ const usePageOftWords = (group = 0, page= 0) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     FetchService.loadPageOfWords(group, page, setOnePage, setIsLoading );
+    return () => {
+      setIsLoading(true)
+    }
   }, [group, page]);
   return [onePage, isLoading];
 };

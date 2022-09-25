@@ -3,7 +3,7 @@ import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import { dictionary, levels } from "../../config/config";
 // import DataContect from "../../helpers/DataContect";
 
-import { Menu, Pagination, Button, Spin } from "antd";
+import { Menu, Pagination, Button, Spin, Card } from "antd";
 import { PlayCircleOutlined } from "@ant-design/icons";
 
 const Dictionary = () => {
@@ -12,7 +12,8 @@ const Dictionary = () => {
   const [page, setPage] = useState(1);
   const [currentWord, curCentWord] = useState(0);
 
-  const [pageOfWords , isLoading = true] = usePageOfWords(group, page - 1);
+  const [pageOfWords , isLoading] = usePageOfWords(group, page - 1);
+
   const menuItems = Object.keys(levels).map((level, idx) => ({
     key: level,
     group: idx,
@@ -36,7 +37,7 @@ const Dictionary = () => {
   };
 
   return (<>
-      {isLoading && <Spin style={{position: 'fixed', top:'40%', left:'40%'}} size="large" />}
+      {isLoading && <Spin style={{position: 'fixed', top:'40%', left:'50%'}} size="large" />}
     <div>
       <h2>Dictionary</h2>
       <Menu mode="horizontal" onClick={menuHandler} selectedKeys={[menuCurrentItem]} items={menuItems}></Menu>
@@ -44,7 +45,7 @@ const Dictionary = () => {
         <div style={{ width: "25vw" }}>
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             {pageOfWords.map((word, idx) => (
-              <Button onClick={() => wordsHandler(word)} type="primary" htmlType="button" key={idx} style={{ width: "25%", margin: "0rem" }}>
+              <Button onClick={() => wordsHandler(idx)} type="primary" htmlType="button" key={idx} style={{ width: "25%", margin: "0rem" }}>
                 {word.word}
               </Button>
             ))}
@@ -53,7 +54,11 @@ const Dictionary = () => {
             <Pagination onChange={pagesHandler} pageSize={dictionary.PAGE_SIZE} simple current={page} total={dictionary.WORDS_IN_CATEGORY} />
           </div>
         </div>
-        <div style={{ width: "75vw", background: "gray" }}>Content</div>
+        <div style={{ width: "75vw", background: "gray",display: 'flex', justifyContent: "center", alignItems: "center"}}>
+<Card>
+  Card
+</Card>
+        </div>
       </div>
     </div>
   </>
