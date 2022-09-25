@@ -18,7 +18,7 @@ export const levels = {
    "Medium": 2 ,
   "Medium+": 3,
   "Hard": 4,
-  "Extra Hard:": 5
+  "Extra Hard": 5
 };
 export const dictionary ={
   PAGE_SIZE : 20,
