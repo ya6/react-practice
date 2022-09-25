@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import { dictionary, levels, urls } from "../../config/config";
-// import DataContect from "../../helpers/DataContect";
 
-import { Menu, Pagination, Button, Spin, Card, Avatar } from "antd";
-import { PlayCircleOutlined } from "@ant-design/icons";
+import usePlaySound from "../../helpers/hooks/usePlaySound";
+
+import { Menu, Pagination, Button, Spin, Space, Avatar } from "antd";
+import { CheckCircleTwoTone, SoundOutlined } from "@ant-design/icons";
 
 const Dictionary = () => {
   const [menuCurrentItem, setMenuCurrentItem] = useState(levels[0]);
@@ -12,14 +13,17 @@ const Dictionary = () => {
   const [page, setPage] = useState(1);
   const [currentWord, setCurrentWord] = useState(0);
   const [seeTranslate, setSeeTranslate] = useState(false);
- 
 
+  const [setSoudUrl] = usePlaySound();
   const [pageOfWords, isLoading] = usePageOfWords(group, page - 1);
 
+  const playSound = (url) => {
+    setSoudUrl(url);
+  };
   const menuItems = Object.keys(levels).map((level, idx) => ({
     key: level,
     group: idx,
-    icon: <PlayCircleOutlined />,
+    icon: <CheckCircleTwoTone />,
     label: level,
   }));
 
@@ -27,18 +31,21 @@ const Dictionary = () => {
     setMenuCurrentItem(e.key);
     setGroup(levels[e.key]);
     setPage(1);
+    setCurrentWord(0);
   };
 
   const pagesHandler = (page) => {
     setPage(page);
+    setCurrentWord(0);
   };
 
   const wordsHandler = (word) => {
     setCurrentWord(word);
   };
+
   useEffect(() => {
     setSeeTranslate(false);
-  }, [currentWord]);
+  }, [currentWord, page, group]);
 
   console.log(pageOfWords[0]);
   return (
@@ -48,7 +55,7 @@ const Dictionary = () => {
         <h2>Dictionary</h2>
         <Menu mode="horizontal" onClick={menuHandler} selectedKeys={[menuCurrentItem]} items={menuItems}></Menu>
         <div style={{ display: "flex" }}>
-          <div style={{ width: "25vw" }}>
+          <div data------sider style={{ width: "25vw" }}>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               {pageOfWords.map((word, idx) => (
                 <Button onClick={() => wordsHandler(idx)} type="primary" htmlType="button" key={idx} style={{ width: "25%", margin: "0rem" }}>
@@ -62,33 +69,63 @@ const Dictionary = () => {
           </div>
           {pageOfWords.length > 0 && (
             <div
-              x-----CONTENT-----x
+              data-----content
               style={{ width: "75vw", background: "gray", display: "flex", justifyContent: "center", alignItems: "center", padding: "1rem" }}
             >
               <div
-                x-----CARD-----x
+                data-------card
                 style={{ width: "80%", height: "40vh", display: "flex", gap: "2rem", background: "white", padding: "1rem", position: "relative" }}
               >
                 <Avatar shape="square" size={200} src={`${urls.HOST}/${pageOfWords[currentWord].image}`} />
                 <div>
-                  <div x-----DESCRIPTION-----x style={{ position: "relative" }}>
+                  <div data-----descriptionstyle={{ position: "relative" }}>
                     <span style={{ fontSize: "2rem", fontWeight: "600", marginRight: "1rem" }}>{pageOfWords[currentWord].word}</span>
                     <span style={{ fontSize: "1.6rem", fontWeight: "400", color: "#aaa" }}>{pageOfWords[currentWord].transcription}</span>
+
+                    <Button
+                      onClick={() => {
+                        playSound(`${urls.HOST}/${pageOfWords[currentWord].audio}`);
+                      }}
+                      type="primary"
+                      shape="circle"
+                      icon={<SoundOutlined />}
+                      style={{ marginLeft: "0.5rem", background: "#aaa", border: "none" }}
+                    />
+
                     <div style={{ fontSize: "1.0rem", fontWeight: "400", color: `${seeTranslate ? "#aaa" : "transparent"}` }}>
                       {pageOfWords[currentWord].wordTranslate}
                     </div>
-                    <div
-                      style={{ fontSize: "1.0rem", fontWeight: "400", color: "" }}
+                    <span
+                      style={{ fontSize: "1.0rem", fontWeight: "400", color: "", display: "inline" }}
                       dangerouslySetInnerHTML={{ __html: pageOfWords[currentWord].textMeaning }}
                     />
-                    <div
-                      style={{ fontSize: "0.9rem", fontWeight: "400",  color: `${seeTranslate ? "#aaa" : "transparent"}` }}
-                      dangerouslySetInnerHTML={{ __html: pageOfWords[currentWord].textMeaningTranslate }}
+                    <Button
+                      onClick={() => {
+                        playSound(`${urls.HOST}/${pageOfWords[currentWord].audioMeaning}`);
+                      }}
+                      type="primary"
+                      shape="circle"
+                      icon={<SoundOutlined />}
+                      style={{ marginLeft: "0.5rem", background: "#aaa", border: "none" }}
                     />
                     <div
+                      style={{ fontSize: "0.9rem", fontWeight: "400", color: `${seeTranslate ? "#aaa" : "transparent"}` }}
+                      dangerouslySetInnerHTML={{ __html: pageOfWords[currentWord].textMeaningTranslate }}
+                    />
+                    <span
                       style={{ fontSize: "1.0rem", fontWeight: "400", color: "" }}
                       dangerouslySetInnerHTML={{ __html: pageOfWords[currentWord].textExample }}
                     />
+                    <Button
+                      onClick={() => {
+                        playSound(`${urls.HOST}/${pageOfWords[currentWord].audioExample}`);
+                      }}
+                      type="primary"
+                      shape="circle"
+                      icon={<SoundOutlined />}
+                      style={{ marginLeft: "0.5rem", background: "#aaa", border: "none" }}
+                    />
+
                     <div
                       style={{ fontSize: "0.9rem", fontWeight: "400", color: `${seeTranslate ? "#aaa" : "transparent"}` }}
                       dangerouslySetInnerHTML={{ __html: pageOfWords[currentWord].textExampleTranslate }}
@@ -100,8 +137,7 @@ const Dictionary = () => {
                         setSeeTranslate(!seeTranslate);
                       }}
                     >
-                      {" "}
-                      translate
+                      Translate
                     </Button>
                     <Button onClick={() => setCurrentWord((currentWord + 1) % dictionary.PAGE_SIZE)}> Next</Button>
                   </div>
