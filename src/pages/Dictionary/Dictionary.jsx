@@ -30,19 +30,17 @@ const Dictionary = () => {
     setCurrentWord(0);
   };
 
-  
-
   // console.log(pageOfWords[0]);
   return (
     <>
       {isLoading && <Spinner />}
       <Container>
-        <h2>Dictionary</h2>
+        <h2 style={{ margin: "2rem" }}>Dictionary</h2>
         <Menu onClick={menuHandler} selectedKeys={[menuCurrentItem]}></Menu>
         <div style={{ display: "flex" }}>
           {pageOfWords.length > 0 && [
-            <WordsList  style={{flex: 1}} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
-            <WordCard style={{flex: 2}} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
+            <WordsList key={"WordsList"} style={{ flex: 1 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
+            <WordCard key={"WordCard"} style={{ flex: 2 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
           ]}
         </div>
         <div style={{ display: "flex", justifyContent: "center", padding: "1.5rem 0.5rem", background: "white" }}>
