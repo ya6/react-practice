@@ -6,7 +6,7 @@ export const urls = {
 };
 export const route = {
   HOME: "home",
-  DICTIONARY: "dictionary",
+  TEXTBOOK: "textbook",
   STATISTICS: "statistics",
   SIGNIN: "signin",
   LOGIN: "login",

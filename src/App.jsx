@@ -40,7 +40,7 @@ const App = () => {
   );
 
   useEffect(() => {
-    navigate(route.DICTIONARY);
+    navigate(route.TEXTBOOK);
   }, []);
 
   return (

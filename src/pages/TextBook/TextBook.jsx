@@ -10,7 +10,7 @@ import Menu from "../../components/Custom/Menu/Menu";
 import WordCard from "../../components/Custom/WordCard/WordCard";
 import WordsList from "../../components/Custom/WordsList/WordsList";
 
-const Dictionary = () => {
+const TextBook = () => {
   const [menuCurrentItem, setMenuCurrentItem] = useState(levels[0]);
   const [group, setGroup] = useState(0);
   const [page, setPage] = useState(1);
@@ -35,7 +35,7 @@ const Dictionary = () => {
     <>
       {isLoading && <Spinner />}
       <Container>
-        <h2 style={{ margin: "2rem" }}>Dictionary</h2>
+        <h2 style={{ margin: "2rem" }}>TextBook</h2>
         <Menu onClick={menuHandler} selectedKeys={[menuCurrentItem]}></Menu>
         <div style={{ display: "flex" }}>
           {pageOfWords.length > 0 && [
@@ -56,4 +56,4 @@ const Dictionary = () => {
     </>
   );
 };
-export default Dictionary;
+export default TextBook;
