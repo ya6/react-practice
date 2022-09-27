@@ -45,7 +45,6 @@ export default class FetchService {
     const data = await FetchService.fetcher(url);
     setStateFunc(data);
     setIsLoading(false)
-
   };
 
   static fetcher = async (url, options = {}) => {

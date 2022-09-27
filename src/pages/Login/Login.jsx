@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import useLoginUser from "../../helpers/hooks/useLoginUser";
 import DataContect from "../../helpers/DataContect";
+import { GUEST_NAME } from "../../config/config";
 
 const Login = () => {
   const [visible, setViisible] = useState(false);
@@ -16,7 +17,7 @@ const Login = () => {
         dataContext.changeUser(serverAnswer.name);
         dataContext.changeMessage("Нou are logged in");
       } else {
-        dataContext.changeUser("guest");
+        dataContext.changeUser(GUEST_NAME);
         dataContext.changeMessage(serverAnswer.serverMessage || "ups");
       }
     }

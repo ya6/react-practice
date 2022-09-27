@@ -3,10 +3,11 @@ import { useState, useEffect, useMemo } from "react";
 import Layout from "./components/Custom/Layout/Layout";
 import DataContext from "./helpers/DataContect";
 import { useNavigate } from "react-router-dom";
-import { route } from "./config/config";
+import { route, GUEST_NAME } from "./config/config";
 
 const App = () => {
-  const [user, setUser] = useState("guest");
+  const [user, setUser] = useState(GUEST_NAME);
+  const [isAuth, setIsAuth] = useState(false);
   const [message, setMessage] = useState(null);
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ const App = () => {
     () => ({
       user,
       setUser,
+
+       isAuth,
+       setIsAuth,
 
       message,
       setMessage,
@@ -33,6 +37,7 @@ const App = () => {
     }),
     [
       user,
+      isAuth,
       message,
       processing,
       //  group, page, pageOfWords
@@ -40,7 +45,7 @@ const App = () => {
   );
 
   useEffect(() => {
-    navigate(route.DICTIONARY);
+    navigate(route.TEXTBOOK);
   }, []);
 
   return (
