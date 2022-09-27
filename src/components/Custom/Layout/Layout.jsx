@@ -6,11 +6,9 @@ import DataContext from "../../../helpers/DataContect";
 import { route } from "../../../config/config";
 
 import "antd/dist/antd.css";
-import {
-  Layout as LayoutAnt, Button, Tooltip, message,
-} from "antd";
+import { Layout as LayoutAnt, Button, Tooltip, message } from "antd";
 
-import { LoginOutlined, LogoutOutlined,  SyncOutlined } from "@ant-design/icons";
+import { LoginOutlined, LogoutOutlined, SyncOutlined } from "@ant-design/icons";
 
 import styles from "./styles.module.scss";
 
@@ -57,33 +55,46 @@ const Layout = () => {
       setLogout(false);
     };
   }, [logout]);
+  const navLinkStyles = ({ isActive }) => {
+    return isActive ?  { fontWeight: "bold", color: "white" } : {}
+  };
 
   return (
     <LayoutAnt className={styles.layout}>
       <Header className={styles.header}>
-        <NavLink className={styles.nav} to="/">
+        <NavLink className={styles.nav}  style={navLinkStyles} to={route.HOME}>
           Home
         </NavLink>
-        <NavLink className={styles.nav} to={route.DICTIONARY}>
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.DICTIONARY}>
           Dictionary
         </NavLink>
-        <NavLink className={styles.nav} to={route.STATISTICS}>
+        <NavLink className={styles.nav}  style={navLinkStyles} to={route.STATISTICS}>
           Statistics
         </NavLink>
-        <NavLink className={styles.nav} to={route.SIGNIN}>
+        <NavLink className={styles.nav}  style={navLinkStyles} to={route.SIGNIN}>
           Sign in
         </NavLink>
         <div style={{ display: "flex" }}>
-
           <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${dataContext.user}`}</div>
           <div>
             {dataContext.user === "guest" ? (
               <Tooltip title="login">
-                <Button style={{ background: "gray" }} type="primary" shape="circle"  icon={dataContext.processing ?  <SyncOutlined spin /> : <LoginOutlined />} onClick={() => setIsRedirect(true)} />
+                <Button
+                  style={{ background: "gray" }}
+                  type="primary"
+                  shape="circle"
+                  icon={dataContext.processing ? <SyncOutlined spin /> : <LoginOutlined />}
+                  onClick={() => setIsRedirect(true)}
+                />
               </Tooltip>
             ) : (
               <Tooltip title="logout">
-                <Button type="primary" shape="circle"  icon={dataContext.processing ?  <SyncOutlined spin /> : <LogoutOutlined />} onClick={() => setLogout(true)} />
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon={dataContext.processing ? <SyncOutlined spin /> : <LogoutOutlined />}
+                  onClick={() => setLogout(true)}
+                />
               </Tooltip>
             )}
           </div>
