@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import DataContext from "../../../helpers/DataContect";
 
-import { GUEST_NAME, route } from "../../../config/config";
+import { GUEST_NAME, route, messages } from "../../../config/config";
 
 import "antd/dist/antd.css";
 import { Layout as LayoutAnt, Button, Tooltip, message } from "antd";
@@ -11,6 +11,7 @@ import { Layout as LayoutAnt, Button, Tooltip, message } from "antd";
 import { LoginOutlined, LogoutOutlined, SyncOutlined } from "@ant-design/icons";
 
 import styles from "./styles.module.scss";
+import StorageService from "../../../services/StorageService";
 
 const { Header, Footer, Content } = LayoutAnt;
 
@@ -45,51 +46,42 @@ const Layout = () => {
     };
   }, [isRedirect]);
 
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     dataContext.setUser("guest");
-  //     dataContext.setMessage("You are logged out");
-  //   }
-  //   return () => {
-  //     setLogout(false);
-  //   };
-  // }, [isAuth]);
-
   const navLinkStyles = ({ isActive }) => {
-    return isActive ?  { fontWeight: "bold", color: "white" } : {}
+    return isActive ? { fontWeight: "bold", color: "white" } : {};
   };
   const logoutHandler = () => {
-    dataContext.setIsAuth(false)
+    dataContext.setIsAuth(false);
     dataContext.setUser(GUEST_NAME);
-    dataContext.setMessage("You are logged out");
-  }
+    dataContext.setMessage(messages.L_OUT);
+    StorageService.clearUser();
+  };
 
   return (
     <LayoutAnt className={styles.layout}>
       <Header className={styles.header}>
-        <NavLink className={styles.nav}  style={navLinkStyles} to={route.HOME}>
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.HOME}>
           Home
         </NavLink>
         <NavLink className={styles.nav} style={navLinkStyles} to={route.TEXTBOOK}>
           TextBook
         </NavLink>
-        <NavLink className={styles.nav}  style={navLinkStyles} to={route.STATISTICS}>
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.STATISTICS}>
           Statistics
         </NavLink>
-        <NavLink className={styles.nav}  style={navLinkStyles} to={route.SIGNIN}>
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.SIGNIN}>
           Sign in
         </NavLink>
         <div style={{ display: "flex" }}>
           <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${dataContext.user}`}</div>
           <div>
-            {dataContext.isAuth  ? (
+            {dataContext.isAuth ? (
               <Tooltip title="logout">
-              <Button
-                type="primary"
-                shape="circle"
-                icon={dataContext.processing ? <SyncOutlined spin /> : <LogoutOutlined />}
-                onClick={logoutHandler}
-              />
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon={dataContext.processing ? <SyncOutlined spin /> : <LogoutOutlined />}
+                  onClick={logoutHandler}
+                />
               </Tooltip>
             ) : (
               <Tooltip title="login">

@@ -24,4 +24,13 @@ export const dictionary ={
   PAGE_SIZE : 20,
   WORDS_IN_CATEGORY : 600
 }
-export const GUEST_NAME = "guest" 
+export const GUEST_NAME = "guest"
+
+export const messages = {
+  L_OUT: "You are logged out",
+  L_IN: "You are logged in",
+  PROCESSING: "processing...",
+  UPS: "Ups...",
+  U_CREATED: "User created",
+  W_BACK: "Welcome back"
+}
