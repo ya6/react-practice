@@ -36,7 +36,7 @@ const TextBook = () => {
       {isLoading && <Spinner />}
       <Container>
         <h2 style={{ margin: "2rem" }}>TextBook</h2>
-        <Menu onClick={menuHandler} selectedKeys={[menuCurrentItem]}></Menu>
+        <Menu onClick={menuHandler} selectedKeys={[menuCurrentItem]}  defaultSelectedKeys={['Easy']}></Menu>
         <div style={{ display: "flex" }}>
           {pageOfWords.length > 0 && [
             <WordsList key={"WordsList"} style={{ flex: 1 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
