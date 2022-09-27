@@ -24,3 +24,4 @@ export const dictionary ={
   PAGE_SIZE : 20,
   WORDS_IN_CATEGORY : 600
 }
+export const GUEST_NAME = "guest" 

@@ -13,10 +13,10 @@ const WordCard = ({ pageOfWords, currentWord, setCurrentWord }) => {
   const [setSoudUrl] = usePlaySound();
 
   return (
-    <div style={{ flex: 2, display: "flex", gap: "2rem", background: "white", padding: "1rem", position: "relative", border: "1px solid #eee" }}>
+    <div style={{ flex: 2, display: "flex", gap: "2rem", background: "white", padding: "1rem" }}>
       <Avatar shape="square" size={200} src={`${urls.HOST}/${pageOfWords[currentWord].image}`} />
-      <div>
-        <div data-----description style={{ position: "relative" }}>
+      <div style={{ flex: 1 }}>
+        <div data-----description style={{ width: "100%" }}>
           <span style={{ fontSize: "2rem", fontWeight: "600", marginRight: "1rem" }}>{pageOfWords[currentWord].word}</span>
           <span style={{ fontSize: "1.6rem", fontWeight: "400", color: "#aaa" }}>{pageOfWords[currentWord].transcription}</span>
 
@@ -69,7 +69,7 @@ const WordCard = ({ pageOfWords, currentWord, setCurrentWord }) => {
             dangerouslySetInnerHTML={{ __html: pageOfWords[currentWord].textExampleTranslate }}
           />
         </div>
-        <div style={{ position: "absolute", bottom: "2%", right: "1%" }}>
+        <div style={{ width: "100%", display: "flex,", justifyContent: "right" }} align="right">
           <Button
             onClick={() => {
               setSeeTranslate(!seeTranslate);

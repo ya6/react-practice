@@ -40,7 +40,7 @@ const TextBook = () => {
         <div style={{ display: "flex" }}>
           {pageOfWords.length > 0 && [
             <WordsList key={"WordsList"} style={{ flex: 1 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
-            <WordCard key={"WordCard"} style={{ flex: 2 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
+            <WordCard key={"WordCard"} style={{ flex: 3 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
           ]}
         </div>
         <div style={{ display: "flex", justifyContent: "center", padding: "1.5rem 0.5rem", background: "white" }}>

@@ -9,11 +9,8 @@ const Statistics = () => {
   return (
     <div>
       <h2>Statistics</h2>
-      {dataContext.user === "guest" && <p>You have to login</p>}
-      {dataContext.user !== "guest"
-      && <p>{firstWords.length > 0 ? firstWords.length : "loading..."}</p>}
+      {dataContext.isAuth ? <p>{firstWords.length > 0 ? firstWords.length : "loading..."}</p> : <p>You have to login</p>}
     </div>
-
   );
 };
 export default Statistics;

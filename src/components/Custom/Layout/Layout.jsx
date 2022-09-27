@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import DataContext from "../../../helpers/DataContect";
 
-import { route } from "../../../config/config";
+import { GUEST_NAME, route } from "../../../config/config";
 
 import "antd/dist/antd.css";
 import { Layout as LayoutAnt, Button, Tooltip, message } from "antd";
@@ -16,7 +16,6 @@ const { Header, Footer, Content } = LayoutAnt;
 
 const Layout = () => {
   const [isRedirect, setIsRedirect] = useState(false);
-  const [logout, setLogout] = useState(false);
   const dataContext = useContext(DataContext);
   const navigate = useNavigate();
 
@@ -46,18 +45,24 @@ const Layout = () => {
     };
   }, [isRedirect]);
 
-  useEffect(() => {
-    if (logout) {
-      dataContext.setUser("guest");
-      dataContext.setMessage("You are logged out");
-    }
-    return () => {
-      setLogout(false);
-    };
-  }, [logout]);
+  // useEffect(() => {
+  //   if (isAuth) {
+  //     dataContext.setUser("guest");
+  //     dataContext.setMessage("You are logged out");
+  //   }
+  //   return () => {
+  //     setLogout(false);
+  //   };
+  // }, [isAuth]);
+
   const navLinkStyles = ({ isActive }) => {
     return isActive ?  { fontWeight: "bold", color: "white" } : {}
   };
+  const logoutHandler = () => {
+    dataContext.setIsAuth(false)
+    dataContext.setUser(GUEST_NAME);
+    dataContext.setMessage("You are logged out");
+  }
 
   return (
     <LayoutAnt className={styles.layout}>
@@ -77,7 +82,16 @@ const Layout = () => {
         <div style={{ display: "flex" }}>
           <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${dataContext.user}`}</div>
           <div>
-            {dataContext.user === "guest" ? (
+            {dataContext.isAuth  ? (
+              <Tooltip title="logout">
+              <Button
+                type="primary"
+                shape="circle"
+                icon={dataContext.processing ? <SyncOutlined spin /> : <LogoutOutlined />}
+                onClick={logoutHandler}
+              />
+              </Tooltip>
+            ) : (
               <Tooltip title="login">
                 <Button
                   style={{ background: "gray" }}
@@ -85,15 +99,6 @@ const Layout = () => {
                   shape="circle"
                   icon={dataContext.processing ? <SyncOutlined spin /> : <LoginOutlined />}
                   onClick={() => setIsRedirect(true)}
-                />
-              </Tooltip>
-            ) : (
-              <Tooltip title="logout">
-                <Button
-                  type="primary"
-                  shape="circle"
-                  icon={dataContext.processing ? <SyncOutlined spin /> : <LogoutOutlined />}
-                  onClick={() => setLogout(true)}
                 />
               </Tooltip>
             )}
