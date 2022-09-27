@@ -3,6 +3,7 @@ import useCreateUser from "../../../helpers/hooks/useCreateUser";
 import DataContect from "../../../helpers/DataContect";
 import TabsContext from "../../../helpers/TabsContect";
 import RegisterBasic from "../../Basic/Register/Register";
+import { messages } from "../../../config/config";
 
 
 const Register = () => {
@@ -21,10 +22,10 @@ const Register = () => {
     if (serverAnswer) {
       dataContext.setProcessing(false);  
       if (serverAnswer.email) {
-        dataContext.setMessage("user created");
+        dataContext.setMessage(messages.U_CREATED);
         setIsRedirect(true);
       } else {
-        dataContext.setMessage(serverAnswer.serverMessage || "ups");
+        dataContext.setMessage(serverAnswer.serverMessage || messages.UPS);
       }
     }
   }, [serverAnswer]);
@@ -37,7 +38,7 @@ const Register = () => {
 
   const signupHandler = (values) => {
     setNewUser(values);
-    dataContext.setMessage("processing...");
+    dataContext.setMessage(messages.PROCESSING);
     dataContext.setProcessing(true);  
   };
   return <RegisterBasic signupHandler={signupHandler} />;

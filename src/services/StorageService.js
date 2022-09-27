@@ -2,6 +2,14 @@ class StorageService {
   static saveUser = (userData) => {
     window.localStorage.setItem("user", JSON.stringify(userData));
   };
+
+  static loadSavedUser = () => {
+    if ( window.localStorage.getItem('user')) {
+    const  user = window.localStorage.getItem('user')
+      return JSON.parse(user);
+  } else return null;
+}
+
   static clearUser = () => {
     window.localStorage.removeItem("user");
   };

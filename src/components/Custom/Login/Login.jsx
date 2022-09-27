@@ -3,7 +3,7 @@ import useLoginUser from "../../../helpers/hooks/useLoginUser";
 import DataContect from "../../../helpers/DataContect";
 import LoginBasic from "../../Basic/Login/Login";
 import StorageService from "../../../services/StorageService";
-import { GUEST_NAME } from "../../../config/config"
+import { GUEST_NAME, messages } from "../../../config/config"
 
 const Login = () => {
   const [credentials, setCredentials] = useState(null);
@@ -16,19 +16,19 @@ const Login = () => {
     if (serverAnswer) {
       if (serverAnswer.userId) {
         dataContext.setUser(serverAnswer.name);
-        dataContext.setMessage("Нou are logged in");
+        dataContext.setMessage(messages.L_IN);
         dataContext.setProcessing(false);
         dataContext.setIsAuth(true);
         StorageService.saveUser(serverAnswer);
       } else {
         dataContext.setUser(GUEST_NAME);
-        dataContext.setMessage(serverAnswer.serverMessage || "ups");
+        dataContext.setMessage(serverAnswer.serverMessage || messages.UPS);
       }
     }
   }, [serverAnswer]);
 
   const loginHandler = (values) => {
-    dataContext.setMessage("processing...");
+    dataContext.setMessage(messages.PROCESSING);
     dataContext.setProcessing(true);
     setCredentials(values);
   };
