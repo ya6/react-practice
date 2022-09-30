@@ -8,51 +8,42 @@ import StorageService from "./services/StorageService";
 
 const App = () => {
   const [user, setUser] = useState(GUEST_NAME);
+  const [userData, setUserData] = useState(GUEST_NAME);
   const [isAuth, setIsAuth] = useState(false);
+  const [currentWord, setCurrentWord] = useState(null);
   const [message, setMessage] = useState(null);
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
-
-  const context = useMemo(
+   const context = useMemo(
     () => ({
       user,
       setUser,
 
-       isAuth,
-       setIsAuth,
+      userData,
+      setUserData,
+      currentWord,
+      setCurrentWord,
+
+      isAuth,
+      setIsAuth,
 
       message,
       setMessage,
 
       processing,
       setProcessing,
-
-      // group,
-      // setGroup,
-
-      // page,
-      // setPage,
-
-      // pageOfWords,
-      // setPageOfWords
     }),
-    [
-      user,
-      isAuth,
-      message,
-      processing,
-      //  group, page, pageOfWords
-    ]
+    [user, isAuth, message, processing]
   );
 
+ 
   useEffect(() => {
     navigate(route.TEXTBOOK);
-    const user = StorageService.loadSavedUser()
+    const user = StorageService.loadSavedUser();
     if (user) {
-     setIsAuth(true);
-     setUser(user.name)
-     setMessage(messages.W_BACK)
-
+      setIsAuth(true);
+      setUser(user.name);
+      setMessage(messages.W_BACK);
     }
   }, []);
 

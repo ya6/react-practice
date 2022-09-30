@@ -15,6 +15,7 @@ const Login = () => {
   useEffect(() => {
     if (serverAnswer) {
       if (serverAnswer.userId) {
+        dataContext.setUserData(serverAnswer);
         dataContext.setUser(serverAnswer.name);
         dataContext.setMessage(messages.L_IN);
         dataContext.setProcessing(false);
