@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { route, GUEST_NAME, messages } from "./config/config";
 import StorageService from "./services/StorageService";
 
-import { AppStateProvider } from "./state/app-state";
-import appStateReducer from './state/appStateReducer';
+import { AppStateProvider, useAppState } from "./state/app-state";
+import appStateReducer from "./state/appStateReducer";
 import initialAppState from "./state/initialAppState";
 
 const App = () => {
@@ -17,14 +17,14 @@ const App = () => {
   const [message, setMessage] = useState(null);
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
-   const context = useMemo(
+  const context = useMemo(
     () => ({
       user,
       setUser,
 
       userData,
       setUserData,
-    
+
       isAuth,
       setIsAuth,
 
@@ -33,13 +33,12 @@ const App = () => {
 
       processing,
       setProcessing,
-     
-
     }),
     [user, isAuth, message, processing]
   );
 
- 
+  const [state, dispatch] = useAppState();
+
   useEffect(() => {
     navigate(route.TEXTBOOK);
     const user = StorageService.loadSavedUser();
@@ -47,20 +46,19 @@ const App = () => {
       setIsAuth(true);
       setUser(user.name);
       setMessage(messages.W_BACK);
+      //global
+      dispatch({type: "AUTH_FROM_STORAGE", userData: user})
     }
   }, []);
 
   return (
-  
     <DataContext.Provider value={context}>
       <Layout />
     </DataContext.Provider>
-  )
-      
+  );
 };
 export default () => (
-  <AppStateProvider reducer={appStateReducer} initialState={initialAppState} >
+  <AppStateProvider reducer={appStateReducer} initialState={initialAppState}>
     <App />
   </AppStateProvider>
-)
-
+);

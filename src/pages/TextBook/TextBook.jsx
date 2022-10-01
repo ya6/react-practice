@@ -1,23 +1,22 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import usePageOfWords from "../../helpers/hooks/usePageOfWords";
-import { dictionary, levels } from "../../config/config";
-import DataContext from '../../helpers/DataContect'
+import { dictionary, levels, urls } from "../../config/config";
 
-import { Pagination } from "antd";
+import { Pagination, Button } from "antd";
 
 import Spinner from "../../components/Basic/Spinner/Spinner";
 import Container from "../../components/Basic/Container/Container";
 import Menu from "../../components/Custom/Menu/Menu";
-import WordCard from "../../components/Custom/WordCard/WordCard";
-import WordsList from "../../components/Custom/WordsList/WordsList";
 
+
+import WordsList from "../../components/Custom/WordsList/WordsList";
+import WordCard from "../../components/Custom/WordCard/WordCard";
 
 const TextBook = () => {
   const [menuCurrentItem, setMenuCurrentItem] = useState(levels[0]);
   const [group, setGroup] = useState(0);
   const [page, setPage] = useState(1);
   const [currentWordNum, setCurrentWordNum] = useState(0);
-  const dataContext = useContext(DataContext)
 
   const [pageOfWords =[], isLoading] = usePageOfWords(group, page - 1);
 
