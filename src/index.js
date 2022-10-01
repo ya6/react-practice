@@ -4,8 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home/Home";
 import Signin from "./pages/Signin/Signin";
-import Register from "./pages/Register/Register";
-import Login from "./pages/Login/Login";
 import TextBook from "./pages/TextBook/TextBook";
 import Statistics from "./pages/Statistics/Statistics";
 import { route } from "./config/config";
