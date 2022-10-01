@@ -19,8 +19,6 @@ root.render(
           <Route path={route.HOME} element={<Home />} />
           <Route path={route.TEXTBOOK} element={<TextBook />} />
           <Route path={route.STATISTICS} element={<Statistics />} />
-          <Route path={route.LOGIN} element={<Login />} />
-          <Route path={route.REGISTER} element={<Register />} />
           <Route path={route.SIGNIN} element={<Signin />} />
         </Route>
       </Routes>
