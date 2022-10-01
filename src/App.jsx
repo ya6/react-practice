@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { route, GUEST_NAME, messages } from "./config/config";
 import StorageService from "./services/StorageService";
 
+import { AppStateProvider, useAppState } from "./state/app-state";
+import appStateReducer from "./state/appStateReducer";
+import initialAppState from "./state/initialAppState";
+
 const App = () => {
   const [user, setUser] = useState(GUEST_NAME);
   const [isAuth, setIsAuth] = useState(false);
@@ -27,21 +31,14 @@ const App = () => {
       processing,
       setProcessing,
 
-      // group,
-      // setGroup,
-
-      // page,
-      // setPage,
-
-      // pageOfWords,
-      // setPageOfWords
+    
     }),
     [
       user,
       isAuth,
       message,
       processing,
-      //  group, page, pageOfWords
+    
     ]
   );
 
@@ -62,4 +59,9 @@ const App = () => {
     </DataContext.Provider>
   );
 };
-export default App;
+
+export default () => (
+  <AppStateProvider reducer={appStateReducer} initialState={initialAppState}>
+    <App />
+  </AppStateProvider>
+);
