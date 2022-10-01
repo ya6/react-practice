@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import { dictionary, levels } from "../../config/config";
+import DataContext from '../../helpers/DataContect'
 
 import { Pagination } from "antd";
 
@@ -10,11 +11,13 @@ import Menu from "../../components/Custom/Menu/Menu";
 import WordCard from "../../components/Custom/WordCard/WordCard";
 import WordsList from "../../components/Custom/WordsList/WordsList";
 
+
 const TextBook = () => {
   const [menuCurrentItem, setMenuCurrentItem] = useState(levels[0]);
   const [group, setGroup] = useState(0);
   const [page, setPage] = useState(1);
   const [currentWordNum, setCurrentWordNum] = useState(0);
+  const dataContext = useContext(DataContext)
 
   const [pageOfWords =[], isLoading] = usePageOfWords(group, page - 1);
 

@@ -22,7 +22,7 @@ const WordCard = ({ pageOfWords, currentWordNum, setCurrentWordNum }) => {
       <div style={{ flex: 1 }}>
         <div data-----description style={{ width: "100%" }}>
           <div style={{ position: "relative" }}>
-            <Switch  checkedChildren="Remembered" unCheckedChildren="Studying" style={{ position: "absolute", top: 0, right: 0 }} />
+            {/* <Switch  checkedChildren="Remembered" unCheckedChildren="Studying" style={{ position: "absolute", top: 0, right: 0 }} /> */}
             <div>
               <span style={{ fontSize: "2rem", fontWeight: "600", marginRight: "1rem" }}>{pageOfWords[currentWordNum].word}</span>
               <span style={{ fontSize: "1.6rem", fontWeight: "400", color: "#aaa" }}>{pageOfWords[currentWordNum].transcription}</span>
