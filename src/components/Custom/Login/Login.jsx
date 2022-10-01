@@ -18,17 +18,17 @@ const Login = () => {
   useEffect(() => {
     if (serverAnswer) {
       if (serverAnswer.userId) {
-        dataContext.setUserData(serverAnswer);
-        dataContext.setUser(serverAnswer.name);
-        dataContext.setMessage(messages.L_IN);
-        dataContext.setProcessing(false);
-        dataContext.setIsAuth(true);
+        // dataContext.setUserData(serverAnswer);
+        // dataContext.setUser(serverAnswer.name);
+        // dataContext.setMessage(messages.L_IN);
+        // dataContext.setProcessing(false);
+        // dataContext.setIsAuth(true);
         //global
         dispatch({ type: "LOGGED_IN", userData: serverAnswer })
         StorageService.saveUser(serverAnswer);
       } else {
-        dataContext.setUser(GUEST_NAME);
-        dataContext.setMessage(serverAnswer.serverMessage || messages.UPS);
+        // dataContext.setUser(GUEST_NAME);
+        // dataContext.setMessage(serverAnswer.serverMessage || messages.UPS);
         //global
         dispatch({ type: "NOTIF_USER_LOGIN_FAIL", message: serverAnswer.serverMessage })
       }
@@ -37,8 +37,8 @@ const Login = () => {
 
   const loginHandler = (values) => {
     setCredentials(values);
-    dataContext.setMessage(messages.PROCESSING);
-    dataContext.setProcessing(true);
+    // dataContext.setMessage(messages.PROCESSING);
+    // dataContext.setProcessing(true);
      //global
      dispatch({type: "NOTIF_START_USER_LOGIN"})  
   };

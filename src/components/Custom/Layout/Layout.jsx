@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import DataContext from "../../../helpers/DataContect";
+import {useAppState} from '../../../state/app-state'
 
 import { GUEST_NAME, route, messages } from "../../../config/config";
 
@@ -18,12 +19,13 @@ const { Header, Footer, Content } = LayoutAnt;
 const Layout = () => {
   const [isRedirect, setIsRedirect] = useState(false);
   const dataContext = useContext(DataContext);
+  const [state, dispatch] = useAppState();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (dataContext.message) {
+    if (state.message) {
       message.info({
-        content: dataContext.message,
+        content: state.message,
         style: {
           position: "fixed",
           top: "10%",
@@ -33,9 +35,10 @@ const Layout = () => {
     }
 
     return () => {
-      dataContext.setMessage(null);
+      dispatch({type: "RESET_MESSAGE"})
+      // dataContext.setMessage(null);
     };
-  }, [dataContext]);
+  }, [state.message]);
 
   useEffect(() => {
     if (isRedirect) {

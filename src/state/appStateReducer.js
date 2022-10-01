@@ -33,6 +33,10 @@ const appStateReducer = (state, action) => {
         return { ...state, message: messages.PROCESSING, processing: true }
       }
 
+      case "RESET_MESSAGE": {
+        return { ...state, message: null }
+      }
+
             
       
   
