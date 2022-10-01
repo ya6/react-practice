@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useMemo, useReducer } from "react";
 const AppDataContect = createContext();
 
 // helps to understand:
@@ -6,7 +6,8 @@ const AppDataContect = createContext();
 // dispatch(action) --> ation = {type: TO_DO, stateChangeData?} --> in reducer --> change data
 
 export const AppStateProvider = ({reducer, initialState = {}, children }) => {
-    const value = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState)
+    const value = useMemo(()=>([state, dispatch] ),  [state, dispatch] )
   return <AppDataContect.Provider value={value} children={children} />;
 };
 

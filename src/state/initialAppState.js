@@ -1,5 +1,7 @@
-const initialAppState = {
+import { GUEST_NAME } from "../config/config";
 
+const initialAppState = {
+    userName: GUEST_NAME,
     userData: {},
     isAuth: false ,
   

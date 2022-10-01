@@ -31,6 +31,6 @@ export const messages = {
   L_IN: "You are logged in",
   PROCESSING: "processing...",
   UPS: "Ups...",
-  U_CREATED: "User created",
+  REGISTERED: "You are registered",
   W_BACK: "Welcome back"
 }
