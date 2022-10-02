@@ -91,7 +91,7 @@ const WordCard = ({ pageOfWords, currentWordNum, setCurrentWordNum }) => {
           </div>
 
           <div>
-            <SaveWordModal title={`Save to repeat list`}>
+            <SaveWordModal word = {pageOfWords[currentWordNum]} title={`Save to repeat list`}>
               <WordForm />
             </SaveWordModal>
           </div>

@@ -1,9 +1,14 @@
 import { Button, Card } from "antd";
 import  { useState, cloneElement } from "react";
+import useSaveUserWord from '../../../helpers/hooks/useSaveUserWord'
 
-const SaveWordModal = ({ title, children }) => {
+
+const SaveWordModal = ({ title, word, children }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [wordData, setWordData] = useState(null);
+ 
+  const [serverAnswer, isLoading] = useSaveUserWord(word, wordData)
+  
 
   const openModal = () => {
     console.log("openModal");
@@ -30,7 +35,7 @@ const SaveWordModal = ({ title, children }) => {
             zIndex: 1000,
           }}
         >
-         {cloneElement(children, {title: title, closeModal: closeModal })}
+         {cloneElement(children, {title: title, closeModal: closeModal, setWordData: setWordData })}
         </Card>
       )}
       {isOpen && (

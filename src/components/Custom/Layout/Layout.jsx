@@ -45,6 +45,11 @@ const Layout = () => {
         <NavLink className={styles.nav} style={navLinkStyles} to={route.TEXTBOOK}>
           TextBook
         </NavLink>
+       
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.REPEAT}>
+          Repeat List
+        </NavLink>
+
         <NavLink className={styles.nav} style={navLinkStyles} to={route.STATISTICS}>
           Statistics
         </NavLink>

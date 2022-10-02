@@ -1,20 +1,20 @@
 import { useState } from "react";
 
-import { Form, Input, Button, Radio,  Divider} from "antd";
+import { Form, Input, Button, Radio, Divider } from "antd";
 const { TextArea } = Input;
 
-const WordForm = ({closeModal, title}) => {
-    // console.log('--->',props);
+const WordForm = ({ closeModal, setWordData, title }) => {
   const onFinish = (values) => {
-    console.log("Success:", values);
+    const { difficulty = "easy", commets = "word" } = values;
+    setWordData({ difficulty, commets });
   };
 
   return (
     <>
-       <h2>{title}</h2>
+      <h2>{title}</h2>
 
-     <Divider></Divider>
-      <Form   name="basic" onFinish={onFinish}>
+      <Divider></Divider>
+      <Form name="basic" onFinish={onFinish}>
         <Form.Item label="Diffculty" name="difficulty">
           <Radio.Group>
             <Radio value="easy"> Easy </Radio>
@@ -22,14 +22,15 @@ const WordForm = ({closeModal, title}) => {
             <Radio value="hard"> Hard </Radio>
           </Radio.Group>
         </Form.Item>
-       
-     
-        <Form.Item label="Coments" name="commets">
-          <TextArea rows={4}/>
+
+        <Form.Item label="Comment" name="commet">
+          <TextArea rows={4} />
         </Form.Item>
         <Divider />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button htmlType="button" onClick={closeModal}>Cancel</Button>
+          <Button htmlType="button" onClick={closeModal}>
+            Cancel
+          </Button>
           <Button type="primary" htmlType="submit">
             Save
           </Button>

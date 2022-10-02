@@ -7,6 +7,7 @@ export const urls = {
 export const route = {
   ABOUT: "about",
   TEXTBOOK: "/textbook",
+  REPEAT: "repeat",
   STATISTICS: "statistics",
   SIGNIN: "signin",
   LOGIN: "login",
