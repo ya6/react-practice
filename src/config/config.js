@@ -5,8 +5,9 @@ export const urls = {
   PATH_NAME_SIGNIN: "signin",
 };
 export const route = {
-  HOME: "home",
-  TEXTBOOK: "textbook",
+  ABOUT: "about",
+  TEXTBOOK: "/textbook",
+  REPEAT: "repeat",
   STATISTICS: "statistics",
   SIGNIN: "signin",
   LOGIN: "login",
@@ -31,6 +32,6 @@ export const messages = {
   L_IN: "You are logged in",
   PROCESSING: "processing...",
   UPS: "Ups...",
-  U_CREATED: "User created",
+  REGISTERED: "You are registered",
   W_BACK: "Welcome back"
 }

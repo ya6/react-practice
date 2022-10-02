@@ -1,36 +1,40 @@
 import { useState, useEffect, useContext } from "react";
 import useLoginUser from "../../../helpers/hooks/useLoginUser";
-import DataContect from "../../../helpers/DataContect";
 import LoginBasic from "../../Basic/Login/Login";
 import StorageService from "../../../services/StorageService";
-import { GUEST_NAME, messages } from "../../../config/config"
+import { useAppState } from "../../../state/app-state";
+import { useNavigate } from "react-router-dom";
+import TabsContext from "../../../helpers/TabsContect";
 
 const Login = () => {
   const [credentials, setCredentials] = useState(null);
-  const [serverAnswer] = useLoginUser(credentials);
+  const [state, dispatch] = useAppState();
+  const { redirectIfLogin } = useContext(TabsContext);
 
-  const dataContext = useContext(DataContect);
+  const [serverAnswer=null] = useLoginUser(credentials);
+  const navigate = useNavigate();
 
-  // TODO message hook
+  useEffect(() => {
+    if (state.userData.userId) {
+      navigate(redirectIfLogin);
+    }
+  }, [state.userData]);
+
   useEffect(() => {
     if (serverAnswer) {
       if (serverAnswer.userId) {
-        dataContext.setUser(serverAnswer.name);
-        dataContext.setMessage(messages.L_IN);
-        dataContext.setProcessing(false);
-        dataContext.setIsAuth(true);
+        dispatch({ type: "LOGGED_IN", userData: serverAnswer });
         StorageService.saveUser(serverAnswer);
       } else {
-        dataContext.setUser(GUEST_NAME);
-        dataContext.setMessage(serverAnswer.serverMessage || messages.UPS);
+        dispatch({ type: "NOTIF_USER_LOGIN_FAIL", message: serverAnswer.serverMessage });
       }
     }
   }, [serverAnswer]);
 
   const loginHandler = (values) => {
-    dataContext.setMessage(messages.PROCESSING);
-    dataContext.setProcessing(true);
     setCredentials(values);
+
+    dispatch({ type: "NOTIF_START_USER_LOGIN" });
   };
 
   return <LoginBasic loginHandler={loginHandler} />;

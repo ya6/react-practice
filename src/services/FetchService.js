@@ -1,19 +1,25 @@
 import { urls } from "../config/config";
 
 export default class FetchService {
-  static createUser = async (user, setStateFunc) => {
-    const url = `${urls.HOST}/${urls.PATH_NAME_USERS}`;
-    const data = await FetchService.serveUser(url, user);
-    setStateFunc(data);
+  //--------sub services
+
+  static fetcher = async (url, options = {}) => {
+    let data;
+    try {
+      const response = await fetch(url, options);
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        data = response.json();
+      } else {
+        data = response.text();
+      }
+    } catch (error) {
+      console.log("error load data");
+    }
+    return data;
   };
 
-  static loginUser = async (credentials, setStateFunc) => {
-    const url = `${urls.HOST}/${urls.PATH_NAME_SIGNIN}`;
-    const data = await FetchService.serveUser(url, credentials);
-    setStateFunc(data);
-  };
-
-  static serveUser = async (url, credentials) => {
+  static servePOST = async (url, credentials) => {
     const options = {
       method: "POST",
       headers: {
@@ -29,6 +35,21 @@ export default class FetchService {
     return data;
   };
 
+  //----------USER
+  static createUser = async (user, setStateFunc) => {
+    const url = `${urls.HOST}/${urls.PATH_NAME_USERS}`;
+    const data = await FetchService.servePOST(url, user);
+    setStateFunc(data);
+  };
+
+  static loginUser = async (credentials, setStateFunc) => {
+    const url = `${urls.HOST}/${urls.PATH_NAME_SIGNIN}`;
+    const data = await FetchService.servePOST(url, credentials);
+    setStateFunc(data);
+  };
+
+  //--------WORDS
+
   static loadFirstWords = async (setStateFunc) => {
     const url = `${urls.HOST}/${urls.PATH_NAME_WORDS}`;
     const data = await FetchService.fetcher(url);
@@ -40,26 +61,53 @@ export default class FetchService {
     setStateFunc(data);
   };
 
-  static loadPageOfWords = async (group = 0, page = 0, setStateFunc, setIsLoading) => {
+  static loadPageOfWords = async (group = 0, page = 0) => {
     const url = `${urls.HOST}/${urls.PATH_NAME_WORDS}?group=${group}&page=${page}`;
+    // console.time("fetch-time");
     const data = await FetchService.fetcher(url);
-    setStateFunc(data);
-    setIsLoading(false)
+    // console.timeEnd("fetch-time");
+    return data;
   };
 
-  static fetcher = async (url, options = {}) => {
-    let data;
-    try {
-      const response = await fetch(url, options);
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.indexOf("application/json") !== -1) {
-        data = response.json();
-      } else {
-        data = response.text();
-      }
-    } catch (error) {
-      console.log("error load data");
-    }
+  //----Registered user requests
+
+  //------User Words
+  static loadUserWords = async (userData) => {
+    const url = `${urls.HOST}/users/${userData.userId}/words`;
+    const options = {
+      method: "GET",
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        Accept: "application/json",
+      },
+    };
+    const data = await FetchService.fetcher(url, options);
+    return data;
+  };
+
+  static saveUserWord = async (userData, currenWord, wordData) => {
+    const url = `${urls.HOST}/users/${userData.userId}/words/${currenWord.id}`;
+
+    const { difficulty, ...rest } = wordData;
+    const _wordData = {
+      difficulty: difficulty,
+      optional: rest,
+    };
+
+    const options = {
+      method: "POST",
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(_wordData),
+    };
+
+    const data = await FetchService.fetcher(url, options);
+
     return data;
   };
 }

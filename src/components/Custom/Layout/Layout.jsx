@@ -1,9 +1,9 @@
 /* eslint-disable import/order */
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
-import DataContext from "../../../helpers/DataContect";
+import { useAppState } from "../../../state/app-state";
 
-import { GUEST_NAME, route, messages } from "../../../config/config";
+import {  route  } from "../../../config/config";
 
 import "antd/dist/antd.css";
 import { Layout as LayoutAnt, Button, Tooltip, message } from "antd";
@@ -17,25 +17,8 @@ const { Header, Footer, Content } = LayoutAnt;
 
 const Layout = () => {
   const [isRedirect, setIsRedirect] = useState(false);
-  const dataContext = useContext(DataContext);
+  const [state, dispatch] = useAppState();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (dataContext.message) {
-      message.info({
-        content: dataContext.message,
-        style: {
-          position: "fixed",
-          top: "10%",
-          right: "1%",
-        },
-      });
-    }
-
-    return () => {
-      dataContext.setMessage(null);
-    };
-  }, [dataContext]);
 
   useEffect(() => {
     if (isRedirect) {
@@ -50,38 +33,38 @@ const Layout = () => {
     return isActive ? { fontWeight: "bold", color: "white" } : {};
   };
   const logoutHandler = () => {
-    dataContext.setIsAuth(false);
-    dataContext.setUser(GUEST_NAME);
-    dataContext.setMessage(messages.L_OUT);
+    dispatch({ type: "LOGOUT" });
     StorageService.clearUser();
   };
 
   return (
     <LayoutAnt className={styles.layout}>
+      {state.message && <div style={{ position: "fixed", top: "10%", right: "1%" }}>{state.message}</div>}
       <Header className={styles.header}>
-        <NavLink className={styles.nav} style={navLinkStyles} to={route.HOME}>
-          Home
-        </NavLink>
+       
         <NavLink className={styles.nav} style={navLinkStyles} to={route.TEXTBOOK}>
           TextBook
         </NavLink>
+       
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.REPEAT}>
+          Repeat List
+        </NavLink>
+
         <NavLink className={styles.nav} style={navLinkStyles} to={route.STATISTICS}>
           Statistics
+        </NavLink>
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.ABOUT}>
+          About
         </NavLink>
         <NavLink className={styles.nav} style={navLinkStyles} to={route.SIGNIN}>
           Sign in
         </NavLink>
         <div style={{ display: "flex" }}>
-          <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${dataContext.user}`}</div>
+          <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${state.userName}`}</div>
           <div>
-            {dataContext.isAuth ? (
+            {state.isAuth ? (
               <Tooltip title="logout">
-                <Button
-                  type="primary"
-                  shape="circle"
-                  icon={dataContext.processing ? <SyncOutlined spin /> : <LogoutOutlined />}
-                  onClick={logoutHandler}
-                />
+                <Button type="primary" shape="circle" icon={state.processing ? <SyncOutlined spin /> : <LogoutOutlined />} onClick={logoutHandler} />
               </Tooltip>
             ) : (
               <Tooltip title="login">
@@ -89,7 +72,7 @@ const Layout = () => {
                   style={{ background: "gray" }}
                   type="primary"
                   shape="circle"
-                  icon={dataContext.processing ? <SyncOutlined spin /> : <LoginOutlined />}
+                  icon={state.processing ? <SyncOutlined spin /> : <LoginOutlined />}
                   onClick={() => setIsRedirect(true)}
                 />
               </Tooltip>

@@ -2,12 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
 import Signin from "./pages/Signin/Signin";
-import Register from "./pages/Register/Register";
-import Login from "./pages/Login/Login";
 import TextBook from "./pages/TextBook/TextBook";
 import Statistics from "./pages/Statistics/Statistics";
+import Repeat from "./pages/Repeat/Repeat";
 import { route } from "./config/config";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
@@ -16,11 +15,10 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path={route.HOME} element={<Home />} />
           <Route path={route.TEXTBOOK} element={<TextBook />} />
+          <Route path={route.REPEAT} element={<Repeat />} />
           <Route path={route.STATISTICS} element={<Statistics />} />
-          <Route path={route.LOGIN} element={<Login />} />
-          <Route path={route.REGISTER} element={<Register />} />
+          <Route path={route.ABOUT} element={<About />} />
           <Route path={route.SIGNIN} element={<Signin />} />
         </Route>
       </Routes>
