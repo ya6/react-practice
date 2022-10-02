@@ -37,7 +37,7 @@ const appStateReducer = (state, action) => {
     }
 
     case "LOGOUT": {
-      return { ...state, isAuth: false, userName: GUEST_NAME, message: messages.L_OUT };
+      return { ...state, isAuth: false, userName: GUEST_NAME, userData: {}, message: messages.L_OUT };
     }
 
     default:
