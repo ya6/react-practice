@@ -41,14 +41,15 @@ const Layout = () => {
     <LayoutAnt className={styles.layout}>
       {state.message && <div style={{ position: "fixed", top: "10%", right: "1%" }}>{state.message}</div>}
       <Header className={styles.header}>
-        <NavLink className={styles.nav} style={navLinkStyles} to={route.HOME}>
-          Home
-        </NavLink>
+       
         <NavLink className={styles.nav} style={navLinkStyles} to={route.TEXTBOOK}>
           TextBook
         </NavLink>
         <NavLink className={styles.nav} style={navLinkStyles} to={route.STATISTICS}>
           Statistics
+        </NavLink>
+        <NavLink className={styles.nav} style={navLinkStyles} to={route.ABOUT}>
+          About
         </NavLink>
         <NavLink className={styles.nav} style={navLinkStyles} to={route.SIGNIN}>
           Sign in

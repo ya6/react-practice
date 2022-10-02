@@ -5,7 +5,7 @@ export const urls = {
   PATH_NAME_SIGNIN: "signin",
 };
 export const route = {
-  HOME: "home",
+  ABOUT: "about",
   TEXTBOOK: "textbook",
   STATISTICS: "statistics",
   SIGNIN: "signin",

@@ -16,7 +16,7 @@ const App = () => {
 
 
   useEffect(() => {
-    // navigate(route.TEXTBOOK);
+    navigate(route.TEXTBOOK);
     const user = StorageService.loadSavedUser()
     if (user) {
     //  setIsAuth(true);
