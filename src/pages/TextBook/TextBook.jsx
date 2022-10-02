@@ -14,7 +14,7 @@ const TextBook = () => {
   const [menuCurrentItem, setMenuCurrentItem] = useState(levels[0]);
   const [group, setGroup] = useState(0);
   const [page, setPage] = useState(1);
-  const [currentWord, setCurrentWord] = useState(0);
+  const [currentWordNum, setCurrentWordNum] = useState(0);
 
   const [pageOfWords, isLoading] = usePageOfWords(group, page - 1);
 
@@ -22,12 +22,12 @@ const TextBook = () => {
     setMenuCurrentItem(e.key);
     setGroup(levels[e.key]);
     setPage(1);
-    setCurrentWord(0);
+    setCurrentWordNum(0);
   };
 
   const pagesHandler = (page) => {
     setPage(page);
-    setCurrentWord(0);
+    setCurrentWordNum(0);
   };
 
   // console.log(pageOfWords[0]);
@@ -39,8 +39,8 @@ const TextBook = () => {
         <Menu onClick={menuHandler} selectedKeys={[menuCurrentItem]}  defaultSelectedKeys={['Easy']}></Menu>
         <div style={{ display: "flex" }}>
           {pageOfWords.length > 0 && [
-            <WordsList key={"WordsList"} style={{ flex: 1 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
-            <WordCard key={"WordCard"} style={{ flex: 3 }} pageOfWords={pageOfWords} currentWord={currentWord} setCurrentWord={setCurrentWord} />,
+            <WordsList key={"WordsList"} style={{ flex: 1 }} pageOfWords={pageOfWords} currentWordNum={currentWordNum} setCurrentWord={setCurrentWordNum} />,
+            <WordCard key={"WordCard"} style={{ flex: 3 }} pageOfWords={pageOfWords} currentWordNum={currentWordNum} setCurrentWordNum={setCurrentWordNum} />,
           ]}
         </div>
         <div style={{ display: "flex", justifyContent: "center", padding: "1.5rem 0.5rem", background: "white" }}>
