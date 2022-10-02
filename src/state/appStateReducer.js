@@ -3,7 +3,7 @@ import { GUEST_NAME, messages } from "../config/config";
 const appStateReducer = (state, action) => {
   switch (action.type) {
     case "AUTH_FROM_STORAGE": {
-      return { ...state, userData: action.userData, isAuth: true, message: messages.W_BACK };
+      return { ...state, userData: action.userData, userName: action.userData.name,  isAuth: true, message: messages.W_BACK };
     }
 
     case "NOTIF_START_USER_REGISTRATION": {
