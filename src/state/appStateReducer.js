@@ -1,4 +1,5 @@
 import { GUEST_NAME, messages } from "../config/config";
+import initialAppState from "./initialAppState";
 
 const appStateReducer = (state, action) => {
   switch (action.type) {
@@ -14,7 +15,7 @@ const appStateReducer = (state, action) => {
     }
 
     case "LOGOUT": {
-      return { ...state, isAuth: false, userName: GUEST_NAME, userData: {}, message: messages.L_OUT };
+      return {  ...initialAppState, message: messages.L_OUT };
     }
 
     case "NOTIF_START_USER_REGISTRATION": {
@@ -44,7 +45,11 @@ const appStateReducer = (state, action) => {
     }
 
     case "LOAD_USER_WORDS": {
-      return { ...state, userWords: action.userWords };
+      return { ...state, userWords: action.userWords,  userWordsTotal: action.userWords.length};
+    }
+
+    case "ADD_USER_WORD": {
+      return { ...state, userWordsTotal: state.userWordsTotal+1};
     }
 
     default:

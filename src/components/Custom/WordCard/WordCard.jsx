@@ -78,8 +78,8 @@ const WordCard = ({ pageOfWords, currentWordNum, setCurrentWordNum }) => {
             dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textExampleTranslate }}
           />
         </div>
-        <div style={{ width: "100%", display: "flex", justifyContent: "space-between", border: "1px solid red" }} align="left">
-          <div style={{ border: "1px solid red" }}>
+        <div style={{ width: "100%", display: "flex", justifyContent: "space-between",  }} align="left">
+          <div >
             <Button
               onClick={() => {
                 setSeeTranslate(!seeTranslate);

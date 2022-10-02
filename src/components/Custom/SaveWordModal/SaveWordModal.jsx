@@ -1,3 +1,4 @@
+import { useAppState } from "../../../state/app-state";
 import { Button, Card } from "antd";
 import  { useState, cloneElement } from "react";
 import useSaveUserWord from '../../../helpers/hooks/useSaveUserWord'
@@ -8,7 +9,7 @@ const SaveWordModal = ({ title, word, children }) => {
   const [wordData, setWordData] = useState(null);
  
   const [serverAnswer, isLoading] = useSaveUserWord(word, wordData)
-  
+  const [state] = useAppState()
 
   const openModal = () => {
     console.log("openModal");
@@ -22,7 +23,7 @@ const SaveWordModal = ({ title, word, children }) => {
 
   return (
     <>
-      <Button onClick={openModal}>{title} </Button>
+      <Button disabled={state.isAuth ? false : true} onClick={openModal}>{title} </Button>
       {isOpen && (
         <Card
           style={{

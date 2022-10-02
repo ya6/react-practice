@@ -30,17 +30,28 @@ const TextBook = () => {
     setCurrentWordNum(0);
   };
 
-  // console.log(pageOfWords[0]);
   return (
     <>
       {isLoading && <Spinner />}
       <Container>
         <h2 style={{ margin: "2rem" }}>TextBook</h2>
-        <Menu onClick={menuHandler} selectedKeys={[menuCurrentItem]}  defaultSelectedKeys={['Easy']}></Menu>
+        <Menu onClick={menuHandler} selectedKeys={[menuCurrentItem]} defaultSelectedKeys={["Easy"]}></Menu>
         <div style={{ display: "flex" }}>
           {pageOfWords.length > 0 && [
-            <WordsList key={"WordsList"} style={{ flex: 1 }} pageOfWords={pageOfWords} currentWordNum={currentWordNum} setCurrentWord={setCurrentWordNum} />,
-            <WordCard key={"WordCard"} style={{ flex: 3 }} pageOfWords={pageOfWords} currentWordNum={currentWordNum} setCurrentWordNum={setCurrentWordNum} />,
+            <WordsList
+              key={"WordsList"}
+              style={{ flex: 1 }}
+              pageOfWords={pageOfWords}
+              currentWordNum={currentWordNum}
+              setCurrentWord={setCurrentWordNum}
+            />,
+            <WordCard
+              key={"WordCard"}
+              style={{ flex: 3 }}
+              pageOfWords={pageOfWords}
+              currentWordNum={currentWordNum}
+              setCurrentWordNum={setCurrentWordNum}
+            />,
           ]}
         </div>
         <div style={{ display: "flex", justifyContent: "center", padding: "1.5rem 0.5rem", background: "white" }}>

@@ -5,6 +5,7 @@ const initialAppState = {
     userData: {},
     isAuth: false,
     userWords: [],
+    userWordsTotal: 0,
   
     message: null,
    

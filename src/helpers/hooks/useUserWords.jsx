@@ -23,7 +23,7 @@ const useUserWords = () => {
       setIsLoading(true);
       isCurrent = false;
     };
-  }, [state.isAuth]);
+  }, [state.isAuth, state.userWordsTotal]);
   return [userWords, isLoading];
 };
 export default useUserWords;
