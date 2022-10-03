@@ -11,12 +11,12 @@ const Check = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const candidate = values.word;
-    const idx = pageOfWords.findIndex((el) => el.word.toLowerCase() === candidate.toLowerCase());
+    const candidate = values.word.toLowerCase();
+    const idx = pageOfWords.findIndex((el) => el.word.toLowerCase() === candidate);
     if (idx == -1) {
         setWrongWords([...wrongWords, candidate]);
-    } else {
-        setLerned(lerned + 1);
+    } else  if(!rigthWords.includes(candidate)) {
+        setLerned(lerned + 1); 
         setRightWords([...rigthWords, candidate]);
     }
     form.resetFields();
