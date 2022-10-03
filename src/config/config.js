@@ -12,6 +12,7 @@ export const route = {
   SIGNIN: "signin",
   LOGIN: "login",
   REGISTER: "register",
+  CHECK: "/check",
 };
 export const levels = {
   "Extra Easy": 0,
@@ -34,4 +35,13 @@ export const messages = {
   UPS: "Ups...",
   REGISTERED: "You are registered",
   W_BACK: "Welcome back"
+}
+
+export const wordStatus = {
+  TO_LERN: "TO_LERN"
+}
+
+export const title = {
+  PUT_TO_LERN: "Put To Lern List",
+  TO_CHECK: "Check knowledge"
 }

@@ -49,7 +49,11 @@ const appStateReducer = (state, action) => {
     }
 
     case "ADD_USER_WORD": {
-      return { ...state, userWordsTotal: state.userWordsTotal+1};
+      return { ...state, userWordsTotal: state.userWordsTotal+1, message: `add word: ${action.message}`};
+    }
+
+    case "SET_CURRENT_WORDS_PAGE": {
+      return { ...state, pageOfWords: action.pageOfWords};
     }
 
     default:

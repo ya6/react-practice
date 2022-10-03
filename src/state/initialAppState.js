@@ -8,12 +8,14 @@ const initialAppState = {
     userWordsTotal: 0,
   
     message: null,
-   
+    
     processing: false,
-  
+    pageOfWords: [],
+
+    
+  //--not used
     group: 0,
     page: 0,
-    pageOfWords: [],
     currentWorNum: 0,
   };
   

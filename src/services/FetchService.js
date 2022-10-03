@@ -92,9 +92,9 @@ export default class FetchService {
     const { difficulty, ...rest } = wordData;
     const _wordData = {
       difficulty: difficulty,
-      optional: rest,
-    };
-
+      optional: {word: currenWord, ...rest},
+         };
+console.log(_wordData);
     const options = {
       method: "POST",
       withCredentials: true,
