@@ -6,6 +6,7 @@ import About from "./pages/About/About";
 import Signin from "./pages/Signin/Signin";
 import TextBook from "./pages/TextBook/TextBook";
 import Statistics from "./pages/Statistics/Statistics";
+import Check from "./pages/Check/Check";
 import Repeat from "./pages/Repeat/Repeat";
 import { route } from "./config/config";
 
@@ -20,6 +21,7 @@ root.render(
           <Route path={route.STATISTICS} element={<Statistics />} />
           <Route path={route.ABOUT} element={<About />} />
           <Route path={route.SIGNIN} element={<Signin />} />
+          <Route path={route.CHECK} element={<Check />} />
         </Route>
       </Routes>
     </BrowserRouter>

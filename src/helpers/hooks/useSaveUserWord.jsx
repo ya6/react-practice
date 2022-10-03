@@ -14,7 +14,7 @@ const useUsersWords = (word, wordData) => {
         if (isCurrent) {
           setUserWord(data);
           setIsLoading(false);
-          dispatch({ type: "ADD_USER_WORD"}); 
+          dispatch({ type: "ADD_USER_WORD" , message: word.word}); 
         }
       });
     }

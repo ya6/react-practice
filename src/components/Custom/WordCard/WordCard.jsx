@@ -1,21 +1,30 @@
 import { useState } from "react";
-
-import { Button, Avatar } from "antd";
+import { useAppState } from "../../../state/app-state";
+import { Button, Avatar, Space } from "antd";
 import { SoundOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 import Switch from "../Switch/Switch";
 import SaveWordModal from "../SaveWordModal/SaveWordModal";
 
 import usePlaySound from "../../../helpers/hooks/usePlaySound";
 
-import { dictionary, urls } from "../../../config/config";
+import { dictionary, title, urls, route } from "../../../config/config";
 import WordForm from "../../Basic/WordForm/WordForm";
+
 
 const WordCard = ({ pageOfWords, currentWordNum, setCurrentWordNum }) => {
   const [seeTranslate, setSeeTranslate] = useState(false);
-
   const [setSoudUrl] = usePlaySound();
 
+  const [state, dispatch] = useAppState();
+
+  const navigate = useNavigate()
+
+const toCheckHandler = () => {
+  dispatch( {type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords })
+  navigate(route.CHECK)
+}
   return (
     <div style={{ flex: 2, display: "flex", gap: "2rem", background: "white", padding: "1rem" }}>
       <Avatar shape="square" size={200} src={`${urls.HOST}/${pageOfWords[currentWordNum].image}`} />
@@ -91,9 +100,13 @@ const WordCard = ({ pageOfWords, currentWordNum, setCurrentWordNum }) => {
           </div>
 
           <div>
-            <SaveWordModal word = {pageOfWords[currentWordNum]} title={`Save to repeat list`}>
+            <Space >
+
+            <SaveWordModal word = {pageOfWords[currentWordNum]} title={title.PUT_TO_LERN}>
               <WordForm />
             </SaveWordModal>
+            <Button type="primary" onClick={toCheckHandler}> {title.TO_CHECK}</Button>
+            </Space>
           </div>
         </div>
       </div>

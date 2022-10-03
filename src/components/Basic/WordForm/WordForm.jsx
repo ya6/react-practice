@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { wordStatus } from "../../../config/config";
 
 import { Form, Input, Button, Radio, Divider } from "antd";
-const { TextArea } = Input;
 
+const { TextArea } = Input;
 const WordForm = ({ closeModal, setWordData, title }) => {
   const onFinish = (values) => {
-    const { difficulty = "easy", commets = "word" } = values;
-    setWordData({ difficulty, commets });
+    const { difficulty = "easy", commet = "no comment" } = values;
+    // hard add property !!!!
+    const properties = { status: wordStatus.TO_LERN };
+    setWordData({ difficulty, commet, ...properties });
   };
 
   return (
     <>
       <h2>{title}</h2>
-
       <Divider></Divider>
       <Form name="basic" onFinish={onFinish}>
         <Form.Item label="Diffculty" name="difficulty">
