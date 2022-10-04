@@ -12,7 +12,7 @@ const initialAppState = {
     processing: false,
     pageOfWords: [],
 
-    
+
   //--not used
     group: 0,
     page: 0,

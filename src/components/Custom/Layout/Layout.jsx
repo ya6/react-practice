@@ -10,8 +10,9 @@ import { Layout as LayoutAnt, Button, Tooltip, message } from "antd";
 
 import { LoginOutlined, LogoutOutlined, SyncOutlined } from "@ant-design/icons";
 
-import styles from "./styles.module.scss";
 import StorageService from "../../../services/StorageService";
+
+import styles from "./styles.module.scss";
 
 const { Header, Footer, Content } = LayoutAnt;
 
@@ -41,6 +42,7 @@ const Layout = () => {
     <LayoutAnt className={styles.layout}>
       {state.message && <div style={{ position: "fixed", top: "10%", right: "1%" }}>{state.message}</div>}
       <Header className={styles.header}>
+        
        
         <NavLink className={styles.nav} style={navLinkStyles} to={route.TEXTBOOK}>
           TextBook

@@ -22,7 +22,7 @@ const WordsList = ({ pageOfWords, currentWordNum, setCurrentWord }) => {
       >
         {pageOfWords.map((word, idx) => {
           let background = "#aaa";
-          if (state.userWords.find((el) => el.wordId === word.id)) {
+          if (state.userWords.find((el) => el.wordId === word.id)) { 
             background = "#96989A";
           }
           if (idx === currentWordNum) {
