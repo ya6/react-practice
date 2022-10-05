@@ -14,6 +14,33 @@ export const route = {
   REGISTER: "register",
   CHECK: "/check",
 };
+
+export const pages = [
+  {
+    page: "TextBook",
+    route: "/textbook",
+
+  },
+
+  {
+    page: "Repeat List",
+    route: "/repeat",   
+  },
+  {
+    page: "Statistics",
+    route: "/statistics",   
+  },
+  {
+    page: "About",
+    route: "/about",   
+  },
+  {
+    page: "Signin",
+    route: "/signin",   
+  },
+
+];
+
 export const levels = {
   "Extra Easy": 0,
   "Easy": 1,

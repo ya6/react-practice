@@ -1,5 +1,4 @@
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Box, Typography } from "@mui/material";
 
 import styles from "./styles.module.scss";
 
@@ -9,10 +8,27 @@ const Login = ({ loginHandler }) => {
   };
 
   return (
-    <div className={styles.form}>
-      <h2>Login form</h2>
+    <>
+      <Box
+        sx={{
+          width: 300,
+          height: 300,
+          backgroundColor: "primary.dark",
+          "&:hover": {
+            backgroundColor: "primary.main",
+            opacity: [0.9, 0.8, 0.7],
+          },
+        }}
+      >
+        <Typography variant="h3" >
+          h1. Heading
+        </Typography>
+      </Box>
 
-      <Form
+      <div className={styles.form}>
+        <h2>Login form</h2>
+
+        {/* <Form
         name="basic"
         initialValues={{
           remember: false,
@@ -62,8 +78,9 @@ const Login = ({ loginHandler }) => {
             Log in
           </Button>
         </Form.Item>
-      </Form>
-    </div>
+      </Form> */}
+      </div>
+    </>
   );
 };
 

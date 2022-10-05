@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import About from "./pages/About/About";
 import Signin from "./pages/Signin/Signin";
-import TextBook from "./pages/TextBook/TextBook";
+import TextBook from "./MUI-Pages/TextBook/TextBook";
 import Statistics from "./pages/Statistics/Statistics";
 import Check from "./pages/Check/Check";
 import Repeat from "./pages/Repeat/Repeat";

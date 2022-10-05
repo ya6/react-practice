@@ -3,17 +3,16 @@ import { useEffect, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useAppState } from "../../../state/app-state";
 
-import {  route  } from "../../../config/config";
-
-import "antd/dist/antd.css";
-import { Layout as LayoutAnt, Button, Tooltip, message } from "antd";
-
-import { LoginOutlined, LogoutOutlined, SyncOutlined } from "@ant-design/icons";
+import { route } from "../../../config/config";
 
 import styles from "./styles.module.scss";
 import StorageService from "../../../services/StorageService";
 
-const { Header, Footer, Content } = LayoutAnt;
+import 'typeface-roboto-material'
+import "./style.scss";
+
+import { Button, Fab } from "@mui/material";
+import { LoginOutlined, LogoutOutlined } from "@mui/icons-material";
 
 const Layout = () => {
   const [isRedirect, setIsRedirect] = useState(false);
@@ -38,14 +37,13 @@ const Layout = () => {
   };
 
   return (
-    <LayoutAnt className={styles.layout}>
+    <div className={styles.layout}>
       {state.message && <div style={{ position: "fixed", top: "10%", right: "1%" }}>{state.message}</div>}
-      <Header className={styles.header}>
-       
+      <header className={styles.header}>
         <NavLink className={styles.nav} style={navLinkStyles} to={route.TEXTBOOK}>
           TextBook
         </NavLink>
-       
+
         <NavLink className={styles.nav} style={navLinkStyles} to={route.REPEAT}>
           Repeat List
         </NavLink>
@@ -63,30 +61,23 @@ const Layout = () => {
           <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${state.userName}`}</div>
           <div>
             {state.isAuth ? (
-              <Tooltip title="logout">
-                <Button type="primary" shape="circle" icon={state.processing ? <SyncOutlined spin /> : <LogoutOutlined />} onClick={logoutHandler} />
-              </Tooltip>
+              <Button variant="contained" startIcon={<LogoutOutlined />} onClick={logoutHandler} />
             ) : (
-              <Tooltip title="login">
-                <Button
-                  style={{ background: "gray" }}
-                  type="primary"
-                  shape="circle"
-                  icon={state.processing ? <SyncOutlined spin /> : <LoginOutlined />}
-                  onClick={() => setIsRedirect(true)}
-                />
-              </Tooltip>
+              // <Button style={{ background: "gray" }} variant="contained" startIcon={<LoginOutlined />} onClick={() => setIsRedirect(true)} />
+              <Fab size="small" color="primary" aria-label="add" onClick={() => setIsRedirect(true)}>
+                <LoginOutlined />
+              </Fab>
             )}
           </div>
         </div>
-      </Header>
+      </header>
 
-      <Content className={styles.content}>
+      <content className={styles.content}>
         <Outlet />
-      </Content>
+      </content>
 
-      <Footer className={styles.footer}>ya6 2022</Footer>
-    </LayoutAnt>
+      <footer className={styles.footer}>ya6 2022</footer>
+    </div>
   );
 };
 

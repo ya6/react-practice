@@ -1,8 +1,9 @@
 /* eslint-disable linebreak-style */
 import { useEffect } from "react";
-import Layout from "./components/Custom/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { route } from "./config/config";
+
+import Layout from "./components/MUI/Custom/Layout/Layout";
 
 import { AppStateProvider } from "./state/app-state";
 import appStateReducer from "./state/appStateReducer";
