@@ -1,11 +1,16 @@
-import { Box, Typography, Paper, Stack, Pagination, PaginationItem, BottomNavigation, BottomNavigationAction } from "@mui/material";
-import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
 import { levels } from "../../config/config";
 import { useState } from "react";
+import usePageOfWords from "../../helpers/hooks/usePageOfWords";
+
+import { Box, Typography, Paper, Stack, Pagination, PaginationItem, BottomNavigation, BottomNavigationAction, Button } from "@mui/material";
+import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
 
 const TextBook = () => {
   const [group, setGroup] = useState(0);
   const [page, setPage] = useState(1);
+  const [currentWordNum, setCurrentWordNum] = useState(0);
+
+  const [pageOfWords, isLoading] = usePageOfWords(group, page - 1);
   const handleChange = (e, value) => {
     // console.log(e, value);
     setPage(value);
@@ -20,6 +25,7 @@ const TextBook = () => {
           sx={{
             flexWrap: "wrap",
             height: "auto",
+            padding: "0.5rem"
           }}
           showLabels
           value={group}
@@ -38,26 +44,49 @@ const TextBook = () => {
             );
           })}
         </BottomNavigation>
+        {isLoading ? (
+          "loading"
+        ) : (
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 2, md: 4 }}>
+            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent:"center", border: "1px solid #ddd" }} flex={3}>
+              {pageOfWords.map((word, idx) => {
+                let background = "#aaa";
+                // if (state.userWords.find((el) => el.wordId === word.id)) {
+                //   background = "#96989A";
+                // }
+                if (idx === currentWordNum) {
+                  background = "#ccc";
+                }
 
-        <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 2, md: 4 }}>
-          <Box sx={{ border: "1px solid #ddd" }} flex={3}>
-            Box 1
-          </Box>
+                return (
+                  <Button
+                    onClick={() => setCurrentWordNum(idx)}
+                    variant="contained"
+                    sx={{  flex: 1, background: `${background}`, textTransform: "none", borderRadius: "0" }}
+                    key={idx}
+                  >
+                    {word.word}
+                  </Button>
+                );
+              })}
+              </Box>
 
-          <Box sx={{ display: "flex", border: "1px solid #ddd" }} flex={5}>
-            <Box
-              component="img"
-              sx={{
-                height: 233,
-                width: 350,
-                maxHeight: { xs: 233, md: 167 },
-                maxWidth: { xs: 350, md: 250 },
-              }}
-              alt="The house from the offer."
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
-            />
-          </Box>
-        </Stack>
+            <Box sx={{ display: "flex", border: "1px solid #ddd" }} flex={5}>
+              <Box
+                component="img"
+                sx={{
+                  height: 233,
+                  width: 350,
+                  maxHeight: { xs: 233, md: 167 },
+                  maxWidth: { xs: 350, md: 250 },
+                }}
+                alt="The house from the offer."
+                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+              />
+            </Box>
+          </Stack>
+        )}
+
         <Stack sx={{ border: "1px solid tranparent" }} direction="row" justifyContent="center" alignItems="center" padding={2}>
           <Pagination
             count={30}
