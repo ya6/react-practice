@@ -53,7 +53,7 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            English
+            Eng
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -65,7 +65,7 @@ const ResponsiveAppBar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon  fontSize="large"/>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -111,7 +111,7 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            English
+            Eng
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, idx) => (
@@ -126,7 +126,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="person" src="" />
+                <Avatar   sx={{ width: 32, height: 32 }} alt="person" src="" />
               </IconButton>
             </Tooltip>
             <Menu

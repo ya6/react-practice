@@ -16,7 +16,7 @@ const Layout = () => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Box>
+      <Box sx={{background: "lightgray", minHeight: "100vh"}}>
         <Navbar />
 
         {/* <div style={{ display: "flex" }}>
@@ -33,7 +33,7 @@ const Layout = () => {
           </div>
         </div> */}
 
-        <Container>
+        <Container  maxWidth="lg">
           <Outlet />
         </Container>
         <footer></footer>

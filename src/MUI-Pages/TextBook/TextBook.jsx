@@ -1,7 +1,10 @@
-import { Box, Typography, Paper, Stack, Pagination, PaginationItem } from "@mui/material";
+import { Box, Typography, Paper, Stack, Pagination, PaginationItem, BottomNavigation, BottomNavigationAction } from "@mui/material";
+import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
+import { levels } from "../../config/config";
 import { useState } from "react";
 
 const TextBook = () => {
+  const [group, setGroup] = useState(0);
   const [page, setPage] = useState(1);
   const handleChange = (e, value) => {
     // console.log(e, value);
@@ -13,8 +16,30 @@ const TextBook = () => {
         TextBook
       </Typography>
       <Paper sx={{ padding: "1rem" }} elevation={1} square>
-        <Box>Menu</Box>
-        <Stack  direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 2, md: 4 }}>
+        <BottomNavigation
+          sx={{
+            flexWrap: "wrap",
+            height: "auto",
+          }}
+          showLabels
+          value={group}
+          onChange={(event, newValue) => {
+            setGroup(newValue);
+          }}
+        >
+          {Object.keys(levels).map((level, idx) => {
+            return (
+              <BottomNavigationAction
+                sx={{ width: "120px", height: "40px" }}
+                key={idx}
+                label={level}
+                icon={group === idx ? <DoneOutlineOutlinedIcon /> : null}
+              />
+            );
+          })}
+        </BottomNavigation>
+
+        <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 2, md: 4 }}>
           <Box sx={{ border: "1px solid #ddd" }} flex={3}>
             Box 1
           </Box>
@@ -33,16 +58,16 @@ const TextBook = () => {
             />
           </Box>
         </Stack>
-        <Stack sx={{ border: "1px solid tranparent" }} direction="row"
-  justifyContent="center"
-  alignItems="center" padding={2}>
+        <Stack sx={{ border: "1px solid tranparent" }} direction="row" justifyContent="center" alignItems="center" padding={2}>
           <Pagination
             count={30}
             variant="outlined"
             shape="rounded"
             page={page}
             onChange={handleChange}
-            renderItem={(item, idx) => <PaginationItem  {...item} sx={{ border: "1px solid #ddd", borderRadius: "2px", fontWeigth: 300, color: "gray" }} />}
+            renderItem={(item, idx) => (
+              <PaginationItem {...item} sx={{ border: "1px solid #ddd", borderRadius: "2px", fontWeigth: 300, color: "gray" }} />
+            )}
           />
         </Stack>
       </Paper>
