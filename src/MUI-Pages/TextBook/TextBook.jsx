@@ -7,13 +7,13 @@ import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
 
 const TextBook = () => {
   const [group, setGroup] = useState(0);
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [currentWordNum, setCurrentWordNum] = useState(0);
 
-  const [pageOfWords, isLoading] = usePageOfWords(group, page - 1);
+  const [pageOfWords, isLoading] = usePageOfWords(group, currentPage - 1);
   const handleChange = (e, value) => {
     // console.log(e, value);
-    setPage(value);
+    setCurrentPage(value);
   };
   return (
     <Box>
@@ -25,7 +25,7 @@ const TextBook = () => {
           sx={{
             flexWrap: "wrap",
             height: "auto",
-            padding: "0.5rem"
+            padding: "0.7rem"
           }}
           showLabels
           value={group}
@@ -59,10 +59,10 @@ const TextBook = () => {
                 }
 
                 return (
-                  <Button
+                  <Button 
                     onClick={() => setCurrentWordNum(idx)}
                     variant="contained"
-                    sx={{  flex: 1, background: `${background}`, textTransform: "none", borderRadius: "0" }}
+                    style={{  flex: 1, background: `${background}`, textTransform: "none", borderRadius: "0", minWidth: "max-content", boxShadow: "none"  }}
                     key={idx}
                   >
                     {word.word}
@@ -92,8 +92,8 @@ const TextBook = () => {
             count={30}
             variant="outlined"
             shape="rounded"
-            page={page}
-            onChange={handleChange}
+            value={currentPage}
+            onChange={(handleChange)}
             renderItem={(item, idx) => (
               <PaginationItem {...item} sx={{ border: "1px solid #ddd", borderRadius: "2px", fontWeigth: 300, color: "gray" }} />
             )}
