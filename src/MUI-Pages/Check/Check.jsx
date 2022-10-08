@@ -1,72 +1,92 @@
 import { useState } from "react";
 import Container from "../../components/Basic/Container/Container";
 import { useAppState } from "../../state/app-state";
-import { Button, Checkbox, Form, Input } from "antd";
-
+// import { Button, Checkbox, Form, Input } from "antd";
+import {
+  Box,
+  TextField,
+  Typography,
+  Paper,
+  Stack,
+  Pagination,
+  PaginationItem,
+  BottomNavigation,
+  BottomNavigationAction,
+  Button,
+  CircularProgress,
+  Fab,
+} from "@mui/material";
 const Check = () => {
+  const [candidate, setCandidate] = useState("");
   const [rigthWords, setRightWords] = useState([]);
   const [wrongWords, setWrongWords] = useState([]);
-  const [lerned, setLerned] = useState(0);
+  const [learned, setLearned] = useState(0);
   const [{ pageOfWords, isAuth }, dispatch] = useAppState();
-  const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    const candidate = values.word.toLowerCase();
-    const idx = pageOfWords.findIndex((el) => el.word.toLowerCase() === candidate);
-    if (idx == -1) {
-        setWrongWords([...wrongWords, candidate]);
-    } else  if(!rigthWords.includes(candidate)) {
-        setLerned(lerned + 1); 
-        setRightWords([...rigthWords, candidate]);
-    }
-    form.resetFields();
+  const changeHandler = (e) => {
+    setCandidate(e.target.value);
   };
-  return (
-    <Container>
-      <div style={{ padding: "1rem" }}>
-        <h2>Check</h2>
-        {true ? (
-          <>
-            <div style={{ display: "flex", background: "white", padding: "1rem" }}>
-                <div style={{flex:1,  padding: " 0 1rem"}}>
-                <h3>{`wrong list:`}</h3>
-                {wrongWords.map((w,idx)=>(<p key={idx}>{w}</p>))}
-                </div>
-              <div style={{ flex: 3 }}>
-                <Form
-               form={form}
-               autoFocus={true}
-                  name="basic"
-                  labelCol={{ span: 8 }}
-                  wrapperCol={{ span: 16 }}
-                  initialValues={{ remember: true }}
-                  onFinish={onFinish}
-                  autoComplete="off"
-                >
-                  <Form.Item label="Word" name="word" rules={[{ required: true, message: "Please input english word!" }]}>
-                    <Input />
-                  </Form.Item>
 
-                  <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button block type="primary" htmlType="submit">
-                      Submit
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </div>
-              <div style={{ flex: 2, padding: " 0 1rem", textAlign: "right" }}>
-                <h2>{`Total: ${pageOfWords.length}`}</h2>
-                <h3>{`Lerned: ${lerned}`}</h3>
-                <h3>{`right list:`}</h3>
-                {rigthWords.map((w,idx)=>(<p key={idx}>{`${idx+1}. ${w}`}</p>))}
-              </div>
-            </div>
-          </>
-        ) : (
-          <p>You have to login</p>
-        )}
-      </div>
-    </Container>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (!candidate) {
+      return;
+    }
+    const idx = pageOfWords.findIndex((el) => el.word.toLowerCase() === candidate.toLowerCase());
+    if (idx == -1) {
+      setWrongWords([...wrongWords, candidate]);
+    } else if (!rigthWords.includes(candidate)) {
+      setLearned(learned + 1);
+      setRightWords([...rigthWords, candidate]);
+    }
+    setCandidate("");
+  };
+
+  return (
+    <Box>
+      <Typography m={3} variant="h6">
+        Check
+      </Typography>
+      <Paper sx={{ padding: "1rem", minHeight: "65vh" }} elevation={1} square>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" color="gray">
+          <Typography style={{ color: "gray" }} variant="subtitle2">
+            {`Total: ${pageOfWords.length}`}
+          </Typography>
+          <Typography style={{ color: "gray" }} variant="subtitle2">
+            {`Learned: ${learned}`}
+          </Typography>
+        </Stack>
+
+        <Stack direction="row" justifyContent="space-between" style={{ background: "lightgray", padding: "0.5rem" }}>
+          <Box flex={2} >
+            <Typography style={{}} variant="subtitle2">
+              {`Wrong:`}
+            </Typography>
+            {wrongWords.map((w, idx) => (
+              <p key={idx}>{w}</p>
+            ))}
+          </Box>
+          <Box flex={3} >
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <TextField required fullWidth id="word" label="Enlish Word" name="word" autoComplete="off" value={candidate} onChange={changeHandler} />
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                Check
+              </Button>
+            </Box>
+          </Box>
+          <Box flex={2} style={{   paddingLeft: "0.5rem" }} >
+            <Typography style={{}} variant="subtitle2">
+              {`Right:`}
+            </Typography>
+            {rigthWords.map((w, idx) => (
+              <p key={idx}>{`${idx + 1}. ${w}`}</p>
+            ))}
+          </Box>
+        
+        </Stack>
+      </Paper>
+    </Box>
   );
 };
 
