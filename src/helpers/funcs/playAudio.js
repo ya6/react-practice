@@ -1,4 +1,4 @@
-const playFetchedAudio4 = async (url) => {
+const playdAudio = async (url) => {
     const audio = new Audio(url)
 
      
@@ -18,4 +18,4 @@ const playFetchedAudio4 = async (url) => {
  
 };
 
-export default playFetchedAudio4;
+export default playdAudio;

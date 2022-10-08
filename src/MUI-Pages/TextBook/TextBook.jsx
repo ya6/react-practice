@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
 import VolumeUpOutlinedIcon from "@mui/icons-material/VolumeUpOutlined";
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
 const TextBook = () => {
   const [group, setGroup] = useState(0);
@@ -35,9 +35,9 @@ const TextBook = () => {
   };
 
   const toCheckHandler = () => {
-    dispatch( {type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords })
-    navigate(route.CHECK)
-  }
+    dispatch({ type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords });
+    navigate(route.CHECK);
+  };
   return (
     <Box>
       <Typography m={3} variant="h6">
@@ -68,12 +68,12 @@ const TextBook = () => {
           })}
         </BottomNavigation>
         {isLoading ? (
-          <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "50%", backgroun: "red" }} />
+          <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "50%" }} />
         ) : (
           <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, sm: 1, md: 1 }}>
             {/* -----List */}
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", border: "1px solid #ddd" }} flex={1}>
+            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }} flex={1}>
               {pageOfWords.map((word, idx) => {
                 let background = "#aaa";
                 // if (state.userWords.find((el) => el.wordId === word.id)) {
@@ -105,9 +105,9 @@ const TextBook = () => {
 
             {/* -----CARD */}
             <Box flex={2}>
-              <Stack direction="row" spacing={2} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
+          
+              <Stack direction={{ md: "row", sm: "column" }}  alignItems="center" spacing={1} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
                 <Box
-                  // component="img"
                   sx={{
                     backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`,
                     backgroundSize: "cover",
@@ -116,15 +116,12 @@ const TextBook = () => {
                     width: 350,
                     maxHeight: { xs: 300, md: 215 },
                     maxWidth: { xs: 350, md: 250 },
-                    border: "1px solid red",
                   }}
-                  // alt="The house from the offer."
-                  // src={`${urls.HOST}/${pageOfWords[currentWordNum].image}`}
                 />
                 {/* word block */}
-                <Box sx={{ border: "1px solid red" }}>
-                {/* data----word----- */}
-                  <Box>
+                <Box>
+                  {/* data----word----- */}
+                  <Box sx={{mt: "1rem"}}>
                     <Box component="span" style={{ fontSize: "2rem", fontWeight: "600" }}>
                       {pageOfWords[currentWordNum].word}
                     </Box>
@@ -148,10 +145,10 @@ const TextBook = () => {
                     {pageOfWords[currentWordNum].wordTranslate}
                   </Box>
                   {/* data-textMeaning */}
-                  <Box >
+                  <Box>
                     <Box
                       component="span"
-                      style={{ fontSize: "1.0rem", fontWeight: "400" }}
+                      style={{ fontSize: "1.0rem", lineHeight: "150%" }}
                       dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textMeaning }}
                     />
                     <Fab
@@ -168,15 +165,14 @@ const TextBook = () => {
                   </Box>
                   {/* data-extMeaning-translate */}
                   <Box
-                    
-                    style={{ fontSize: "1.0rem",  color: `${seeTranslate ? "#aaa" : "transparent"}` }}
+                    style={{ fontSize: "1.0rem", color: `${seeTranslate ? "#aaa" : "transparent"}` }}
                     dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textMeaningTranslate }}
                   />
                   {/* data-textExample */}
-                  <Box >
+                  <Box>
                     <Box
                       component="span"
-                      style={{ fontSize: "1.0rem", fontWeight: "400" }}
+                      style={{ fontSize: "1.0rem", lineHeight: "150%" }}
                       dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textExample }}
                     />
                     <Fab
@@ -193,34 +189,42 @@ const TextBook = () => {
                   </Box>
                   {/* data-textExample-translate */}
                   <Box
-                    
                     style={{ fontSize: "1rem", color: `${seeTranslate ? "#aaa" : "transparent"}` }}
                     dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textExampleTranslate }}
                   />
-
                 </Box>
               </Stack>
-              <div style={{ width: "100%", display: "flex", justifyContent: "space-between",  }} align="left">
-          <div >
-            <Button variant	= 'outlined'  color="gray"
-              onClick={() => {
-                setSeeTranslate(!seeTranslate);
-              }}
-            >
-              Translate
-            </Button>
-            <Button variant	= 'outlined' color="gray"  endIcon={<ArrowCircleRightOutlinedIcon />} 
-             onClick={() => setCurrentWordNum((currentWordNum + 1) % dictionary.PAGE_SIZE)}>Next Word</Button>
-          </div>
+              <Box style={{ width: "100%", display: "flex", justifyContent: "space-between", marginTop: "0.5rem" }} >
+                <Box>
+                  <Button spacing={1} 
+                    variant="outlined"
+                    color="gray"
+                    onClick={() => {
+                      setSeeTranslate(!seeTranslate);
+                    }}
+                  >
+                    Translate
+                  </Button>
+                  <Button sx={{margin: "0.3rem 0.3rem 0.3rem 0"}}
+                    variant="outlined"
+                    color="gray"
+                    endIcon={<ArrowCircleRightOutlinedIcon />}
+                    onClick={() => setCurrentWordNum((currentWordNum + 1) % dictionary.PAGE_SIZE)}
+                  >
+                    Next Word
+                  </Button>
+                </Box>
 
-          <div>       
-            {/* <SaveWordModal word = {pageOfWords[currentWordNum]} title={title.PUT_TO_LERN}>
+                <div>
+                  {/* <SaveWordModal word = {pageOfWords[currentWordNum]} title={title.PUT_TO_LERN}>
               <WordForm />
             </SaveWordModal> */}
-            <Button type="primary" onClick={toCheckHandler}> {title.TO_CHECK}</Button>
-           
-          </div>
-        </div>
+                  <Button type="primary" onClick={toCheckHandler}>
+                   
+                    {title.TO_CHECK}
+                  </Button>
+                </div>
+              </Box>
             </Box>
           </Stack>
         )}
