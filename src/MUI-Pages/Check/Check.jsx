@@ -58,7 +58,7 @@ const Check = () => {
           </Typography>
         </Stack>
 
-        <Stack direction="row" justifyContent="space-between" style={{ background: "lightgray", padding: "0.5rem" }}>
+        <Stack direction="row" justifyContent="space-between" style={{ minHeight: "57vh", background: "lightgray", padding: "0.5rem" }}>
           <Box flex={2} >
             <Typography style={{}} variant="subtitle2">
               {`Wrong:`}
