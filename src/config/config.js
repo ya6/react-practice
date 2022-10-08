@@ -41,6 +41,8 @@ export const pages = [
 
 ];
 
+export const version = "0.1";
+
 export const levels = {
   "Extra Easy": 0,
   "Easy": 1,

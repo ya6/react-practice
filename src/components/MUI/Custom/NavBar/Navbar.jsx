@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { pages } from "../../../../config/config";
+import { pages, version } from "../../../../config/config";
 
 import { AppBar, Box, Toolbar, Typography, Menu, MenuItem, Container, Avatar, Button, Tooltip } from "@mui/material";
 
@@ -53,7 +53,7 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            Eng
+            Eng {version}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -111,7 +111,7 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            Eng
+            Eng {version}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, idx) => (
