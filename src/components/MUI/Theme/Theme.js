@@ -21,4 +21,12 @@ export const theme = createTheme({
           xl: 1536,
         },
       },
+      palette: {
+        gray:  {
+            light: "#ccc",
+            main: "#9e9e9e",
+            dark: "#565656"
+           
+          }
+      },
 })

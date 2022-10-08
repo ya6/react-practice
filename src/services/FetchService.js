@@ -58,6 +58,7 @@ export default class FetchService {
     //   setStateFunc(data);
     // }, 2000);
 
+
     setStateFunc(data);
   };
 
@@ -66,6 +67,7 @@ export default class FetchService {
     // console.time("fetch-time");
     const data = await FetchService.fetcher(url);
     // console.timeEnd("fetch-time");
+    
     return data;
   };
 
