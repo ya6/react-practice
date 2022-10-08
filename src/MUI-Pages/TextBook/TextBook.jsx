@@ -1,5 +1,7 @@
-import { urls, levels, title, dictionary } from "../../config/config";
+import { urls, route, levels, title, dictionary } from "../../config/config";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppState } from "../../state/app-state";
 import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import usePlaySound from "../../helpers/hooks/usePlaySound";
 
@@ -26,6 +28,9 @@ const TextBook = () => {
   const [currentWordNum, setCurrentWordNum] = useState(0);
   const [seeTranslate, setSeeTranslate] = useState(false);
 
+  
+  const [state, dispatch] = useAppState();
+
   const [setSoudUrl] = usePlaySound();
 
   const [pageOfWords, isLoading] = usePageOfWords(group, currentPageNum - 1);
@@ -33,7 +38,7 @@ const TextBook = () => {
   const handleChange = (e, value) => {
     setCurrentPageNum(value);
   };
-
+  const navigate = useNavigate()
   const toCheckHandler = () => {
     dispatch({ type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords });
     navigate(route.CHECK);
@@ -111,7 +116,7 @@ const TextBook = () => {
                     backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    
+
                     height: 170,
                     width: 200,
                   }}

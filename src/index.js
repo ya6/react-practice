@@ -6,7 +6,7 @@ import About from "./pages/About/About";
 import Signin from "./pages/Signin/Signin";
 import TextBook from "./MUI-Pages/TextBook/TextBook";
 import Statistics from "./pages/Statistics/Statistics";
-import Check from "./pages/Check/Check";
+import Check from "./MUI-Pages/Check/Check";
 import Repeat from "./pages/Repeat/Repeat";
 import { route } from "./config/config";
 
