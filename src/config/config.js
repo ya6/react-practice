@@ -41,15 +41,15 @@ export const pages = [
 
 ];
 
-export const version = "0.1";
+export const version = "0.1.1";
 
 export const levels = {
-  "Extra Easy": 0,
-  "Easy": 1,
-   "Medium": 2 ,
-  "Medium+": 3,
-  "Hard": 4,
-  "Extra Hard": 5
+  "Group 1": 0,
+  "Group 2": 1,
+   "Group 3": 2 ,
+  "Group 4": 3,
+  "Group 5": 4,
+  "Group 6": 5
 };
 export const dictionary ={
   PAGE_SIZE : 20,

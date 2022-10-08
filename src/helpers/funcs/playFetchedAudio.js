@@ -6,9 +6,7 @@ const playFetchedAudio = async (url) => {
 } else {
   console.log("AudioContext");   
    ctx = new AudioContext();
-}
-
-  try {
+   try {
     const response = await fetch(url);
     const buffer = await response.arrayBuffer();
     const decodedAudio = await ctx.decodeAudioData(buffer);
@@ -18,6 +16,9 @@ const playFetchedAudio = async (url) => {
     playSound.connect(ctx.destination);
     playSound.start(ctx.currentTime);
   } catch (error) {}
+}
+
+ 
 };
 
 export default playFetchedAudio;
