@@ -105,23 +105,21 @@ const TextBook = () => {
 
             {/* -----CARD */}
             <Box flex={2}>
-          
-              <Stack direction={{ md: "row", sm: "column" }}  alignItems="center" spacing={1} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
+              <Stack direction={{ md: "row", sm: "column" }} alignItems="center" spacing={1} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
                 <Box
                   sx={{
                     backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    height: 300,
-                    width: 350,
-                    maxHeight: { xs: 300, md: 215 },
-                    maxWidth: { xs: 350, md: 250 },
+                    
+                    height: 170,
+                    width: 200,
                   }}
                 />
                 {/* word block */}
                 <Box>
                   {/* data----word----- */}
-                  <Box sx={{mt: "1rem"}}>
+                  <Box sx={{ mt: "1rem" }}>
                     <Box component="span" style={{ fontSize: "2rem", fontWeight: "600" }}>
                       {pageOfWords[currentWordNum].word}
                     </Box>
@@ -194,9 +192,10 @@ const TextBook = () => {
                   />
                 </Box>
               </Stack>
-              <Box style={{ width: "100%", display: "flex", justifyContent: "space-between", marginTop: "0.5rem" }} >
+              <Box style={{ width: "100%", display: "flex", justifyContent: "space-between", marginTop: "0.5rem" }}>
                 <Box>
-                  <Button spacing={1} 
+                  <Button
+                    spacing={1}
                     variant="outlined"
                     color="gray"
                     onClick={() => {
@@ -205,7 +204,8 @@ const TextBook = () => {
                   >
                     Translate
                   </Button>
-                  <Button sx={{margin: "0.3rem 0.3rem 0.3rem 0"}}
+                  <Button
+                    sx={{ margin: "0.3rem 0.3rem 0.3rem 0" }}
                     variant="outlined"
                     color="gray"
                     endIcon={<ArrowCircleRightOutlinedIcon />}
@@ -220,7 +220,6 @@ const TextBook = () => {
               <WordForm />
             </SaveWordModal> */}
                   <Button type="primary" onClick={toCheckHandler}>
-                   
                     {title.TO_CHECK}
                   </Button>
                 </div>
