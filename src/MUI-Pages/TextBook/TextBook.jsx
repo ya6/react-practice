@@ -23,12 +23,13 @@ import VolumeUpOutlinedIcon from "@mui/icons-material/VolumeUpOutlined";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
 const TextBook = () => {
-  const [group, setGroup] = useState(0);
-  const [currentPageNum, setCurrentPageNum] = useState(1);
+  const getGroup = () => Number(window.localStorage.getItem("group")) || 0;
+  const getPage = () => Number(window.localStorage.getItem("page")) + 1 || 1;
+  const [group, setGroup] = useState(getGroup);
+  const [currentPageNum, setCurrentPageNum] = useState(getPage);
   const [currentWordNum, setCurrentWordNum] = useState(0);
   const [seeTranslate, setSeeTranslate] = useState(false);
 
-  
   const [state, dispatch] = useAppState();
 
   const [setSoudUrl] = usePlaySound();
@@ -38,7 +39,7 @@ const TextBook = () => {
   const handleChange = (e, value) => {
     setCurrentPageNum(value);
   };
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const toCheckHandler = () => {
     dispatch({ type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords });
     navigate(route.CHECK);
@@ -59,6 +60,7 @@ const TextBook = () => {
           value={group}
           onChange={(event, newValue) => {
             setGroup(newValue);
+            setCurrentPageNum(1);
           }}
         >
           {Object.keys(levels).map((level, idx) => {

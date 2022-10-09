@@ -13,6 +13,18 @@ class StorageService {
   static clearUser = () => {
     window.localStorage.removeItem("user");
   };
+
+  static saveItem = (item, data) => {
+    window.localStorage.setItem(item, JSON.stringify(data));
+  };
+
+  static loadItem = (item) => {
+    if ( window.localStorage.getItem(item)) {
+      const  item = window.localStorage.getItem(item)
+        return JSON.parse(item);
+    } else return null;
+  };
+
 }
 export default StorageService;
 

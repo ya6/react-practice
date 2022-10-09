@@ -56,6 +56,10 @@ const appStateReducer = (state, action) => {
       return { ...state, pageOfWords: action.pageOfWords};
     }
 
+    case "WRITE_GROUP_PAGE": {
+      return { ...state, group: action.group, page: action.page};
+    }
+
     default:
       // return state
       throw new Error();

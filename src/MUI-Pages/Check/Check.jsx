@@ -1,21 +1,9 @@
 import { useState } from "react";
-import Container from "../../components/Basic/Container/Container";
+
 import { useAppState } from "../../state/app-state";
-// import { Button, Checkbox, Form, Input } from "antd";
-import {
-  Box,
-  TextField,
-  Typography,
-  Paper,
-  Stack,
-  Pagination,
-  PaginationItem,
-  BottomNavigation,
-  BottomNavigationAction,
-  Button,
-  CircularProgress,
-  Fab,
-} from "@mui/material";
+
+import { Box, TextField, Typography, Paper, Stack, Button } from "@mui/material";
+
 const Check = () => {
   const [candidate, setCandidate] = useState("");
   const [rigthWords, setRightWords] = useState([]);
@@ -59,7 +47,7 @@ const Check = () => {
         </Stack>
 
         <Stack direction="row" justifyContent="space-between" style={{ minHeight: "57vh", background: "lightgray", padding: "0.5rem" }}>
-          <Box flex={2} >
+          <Box flex={2}>
             <Typography style={{}} variant="subtitle2">
               {`Wrong:`}
             </Typography>
@@ -67,15 +55,24 @@ const Check = () => {
               <p key={idx}>{w}</p>
             ))}
           </Box>
-          <Box flex={3} >
+          <Box flex={3}>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <TextField required fullWidth id="word" label="Enlish Word" name="word" autoComplete="off" value={candidate} onChange={changeHandler} />
+              <TextField
+                required
+                fullWidth
+                id="word"
+                label="English Word"
+                name="word"
+                autoComplete="off"
+                value={candidate}
+                onChange={changeHandler}
+              />
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 Check
               </Button>
             </Box>
           </Box>
-          <Box flex={2} style={{   paddingLeft: "0.5rem" }} >
+          <Box flex={2} style={{ paddingLeft: "0.5rem" }}>
             <Typography style={{}} variant="subtitle2">
               {`Right:`}
             </Typography>
@@ -83,7 +80,6 @@ const Check = () => {
               <p key={idx}>{`${idx + 1}. ${w}`}</p>
             ))}
           </Box>
-        
         </Stack>
       </Paper>
     </Box>

@@ -6,6 +6,8 @@ const initialAppState = {
     isAuth: false,
     userWords: [],
     userWordsTotal: 0,
+    group: 0,
+    page: 0,
   
     message: null,
     
@@ -14,8 +16,6 @@ const initialAppState = {
 
     
   //--not used
-    group: 0,
-    page: 0,
     currentWorNum: 0,
   };
   
