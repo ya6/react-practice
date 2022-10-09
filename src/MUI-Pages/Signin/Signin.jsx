@@ -1,4 +1,4 @@
-import SigninTabs from "../../components/Custom/SigninTabs/SigninTabs";
+import SigninTabs from "../../components/MUI/Custom/SigninTabs/SigninTabs";
 import Login from "../../components/MUI/Custom/Login/Login";
 import Register from "../../components/MUI/Custom/Register/Register"
 import { useState, useMemo } from "react";

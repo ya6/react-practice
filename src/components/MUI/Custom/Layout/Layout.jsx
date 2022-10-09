@@ -36,20 +36,6 @@ const Layout = () => {
       <Box sx={{ background: "lightgray", minHeight: "100vh" }}>
         <Navbar />
 
-        {/* <div style={{ display: "flex" }}>
-          <div style={{ color: "white", marginRight: "0.5rem" }}>{`Hi, ${state.userName}`}</div>
-          <div>
-            {state.isAuth ? (
-              <Button variant="contained" startIcon={<LogoutOutlined />} onClick={logoutHandler} />
-            ) : (
-              // <Button style={{ background: "gray" }} variant="contained" startIcon={<LoginOutlined />} onClick={() => setIsRedirect(true)} />
-              <Fab size="small" color="primary" aria-label="add" onClick={() => setIsRedirect(true)}>
-                <LoginOutlined />
-              </Fab>
-            )}
-          </div>
-        </div> */}
-
         <Container maxWidth="lg">
           <Outlet />
         </Container>
@@ -60,7 +46,7 @@ const Layout = () => {
           // onClose={handleClose} // clear timeout ???
           TransitionComponent={Grow}
         >
-          <Alert style={{ position: "fixed", top: "10.5%", right: "4%", background: "white" }} severity="info">
+          <Alert  style={{ position: "fixed", top: "11%", right: "5%", background: "white",  boxShadow: "4px 4px 8px 0px rgba(34, 60, 80, 0.2)" }} severity="info">
             {state.message}
           </Alert>
         </Snackbar>
