@@ -76,7 +76,7 @@ const TextBook = () => {
           })}
         </BottomNavigation>
         {isLoading ? (
-          <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "50%", zIndex: 1000 }} />
+          <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "48%", zIndex: 1000 }} />
         ) : (
           <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, sm: 1, md: 1 }}>
             {/* -----List */}

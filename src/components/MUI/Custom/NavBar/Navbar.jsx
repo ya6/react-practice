@@ -1,12 +1,15 @@
+import { useAppState } from "../../../../state/app-state";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { pages, version } from "../../../../config/config";
+import { useNavigate, NavLink } from "react-router-dom";
+import { pages, route, version } from "../../../../config/config";
+import StorageService from "../../../../services/StorageService";
 
 import { AppBar, Box, Toolbar, Typography, Menu, MenuItem, Container, Avatar, Button, Tooltip } from "@mui/material";
 
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
+import { Login } from "@mui/icons-material";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -14,24 +17,43 @@ const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
+  const [{isAuth}, dispatch] =useAppState()
+
+  const navigate = useNavigate()
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    if (isAuth) {
+      setAnchorElUser(event.currentTarget);
+      
+    }
+    navigate(route.SIGNIN)
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
+    switch (setting) {
+      case "Logout":
+        dispatch({ type: "LOGOUT" });
+        StorageService.clearUser();
+        break;
+    
+      default:
+        break;
+    }
     setAnchorElUser(null);
   };
 
   const navLinkStyles = ({ isActive }) => {
     return isActive ? { fontWeight: "bold", color: "white", textDecoration: "none" } : { color: "white", textDecoration: "none", fontWeight: 400 };
   };
+
+ 
 
   return (
     <AppBar sx={{ background: "#2B2E4A" }} position="static">
@@ -124,7 +146,7 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title={ isAuth ? "Open settings" : "Log in"}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar   sx={{ width: 32, height: 32 }} alt="person" src="" />
               </IconButton>
@@ -146,7 +168,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={()=> {handleCloseUserMenu(setting)}}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

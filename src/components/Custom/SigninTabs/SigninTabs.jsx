@@ -1,19 +1,25 @@
-import { Card, Button } from "antd";
+import { Button, Stack, Paper } from "@mui/material";
 import TabsContext from "../../../helpers/TabsContect";
 import { useContext, Children } from "react";
 
 const SigninTabs = ({ children }) => {
-  const {activeIndex, setActiveIndex} = useContext(TabsContext)
-  
+  const { activeIndex, setActiveIndex } = useContext(TabsContext);
+
   return (
-    <Card style={{ margin: "3rem auto", width: "500px" }}>
-      <div style={{ display: "flex" }}>
+    <Paper style={{ margin: "3rem auto", padding: "2rem", width: "500px" }}>
+      <Stack direction="row" style={{ display: "flex" }}>
         {Children.toArray(children).map((child, idx) => {
           return (
             <Button
-              style={idx === activeIndex ? { flex: 1.5 } : { flex: 1 }}
+              variant="outlined"
+              style={{
+                flex: `${idx === activeIndex ? 2 : 1}`,
+                color: `${idx === activeIndex ? "#3d5afe" : "gray"}`,
+                borderRadius: "0",
+                fontWeight: 400,
+                border: "1px solid lightgray",
+              }}
               key={idx}
-              block
               onClick={() => {
                 setActiveIndex(idx);
               }}
@@ -22,9 +28,9 @@ const SigninTabs = ({ children }) => {
             </Button>
           );
         })}
-      </div>
+      </Stack>
       {Children.toArray(children)[activeIndex]}
-    </Card>
+    </Paper>
   );
 };
 

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import About from "./pages/About/About";
-import Signin from "./pages/Signin/Signin";
+import Signin from "./MUI-Pages/Signin/Signin";
 import TextBook from "./MUI-Pages/TextBook/TextBook";
 import Statistics from "./pages/Statistics/Statistics";
 import Check from "./MUI-Pages/Check/Check";

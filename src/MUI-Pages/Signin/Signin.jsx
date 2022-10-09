@@ -1,10 +1,9 @@
 import SigninTabs from "../../components/Custom/SigninTabs/SigninTabs";
-import Login from "../../components/Custom/Login/Login";
-import Register from "../../components/MUI/Custom/Register/Register";
+import Login from "../../components/MUI/Custom/Login/Login";
+import Register from "../../components/MUI/Custom/Register/Register"
 import { useState, useMemo } from "react";
 import TabsContext from "../../helpers/TabsContect";
 import { route } from "../../config/config";
-
 const Signin = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const redirectIfLogin = route.TEXTBOOK

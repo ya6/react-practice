@@ -8,6 +8,8 @@ const appStateReducer = (state, action) => {
       return { ...state, userData: action.userData, userName: action.userData.name, isAuth: true, message: messages.W_BACK };
     }
 
+
+
     //--------------------------------USER LOGING
 
     case "LOGGED_IN": {
@@ -60,6 +62,11 @@ const appStateReducer = (state, action) => {
       return { ...state, group: action.group, page: action.page};
     }
 
+    case "SET_MESSAGE": {
+      return { ...state, message: action.message};
+    }
+
+  
     default:
       // return state
       throw new Error();
