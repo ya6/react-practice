@@ -23,6 +23,7 @@ import VolumeUpOutlinedIcon from "@mui/icons-material/VolumeUpOutlined";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
 const TextBook = () => {
+  //lazy
   const getGroup = () => Number(window.localStorage.getItem("group")) || 0;
   const getPage = () => Number(window.localStorage.getItem("page")) + 1 || 1;
   const [group, setGroup] = useState(getGroup);
@@ -240,7 +241,7 @@ const TextBook = () => {
             count={30}
             variant="outlined"
             shape="rounded"
-            value={currentPageNum}
+            page={currentPageNum}
             onChange={handleChange}
             renderItem={(item, idx) => (
               <PaginationItem {...item} sx={{ border: "1px solid #ddd", borderRadius: "2px", fontWeigth: 300, color: "gray" }} />

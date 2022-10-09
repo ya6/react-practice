@@ -9,7 +9,7 @@ const Check = () => {
   const [rigthWords, setRightWords] = useState([]);
   const [wrongWords, setWrongWords] = useState([]);
   const [learned, setLearned] = useState(0);
-  const [{ pageOfWords, isAuth }, dispatch] = useAppState();
+  const [{ pageOfWords, group, page, }, dispatch] = useAppState();
 
   const changeHandler = (e) => {
     setCandidate(e.target.value);
@@ -41,6 +41,15 @@ const Check = () => {
           <Typography style={{ color: "gray" }} variant="subtitle2">
             {`Total: ${pageOfWords.length}`}
           </Typography>
+          <Stack direction="row">
+
+          <Typography style={{ color: "gray" }} variant="body2">
+            {`Group: ${group+1}`}
+          </Typography>
+          <Typography style={{ color: "gray" }} variant="body2" ml={1}>
+            {`Page: ${page+1}`}
+          </Typography>
+          </Stack>
           <Typography style={{ color: "gray" }} variant="subtitle2">
             {`Learned: ${learned}`}
           </Typography>
