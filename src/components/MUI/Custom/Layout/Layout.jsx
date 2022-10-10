@@ -46,7 +46,7 @@ const Layout = () => {
           // onClose={handleClose} // clear timeout ???
           TransitionComponent={Grow}
         >
-          <Alert  style={{ position: "fixed", top: "11%", right: "5%", background: "white",  boxShadow: "4px 4px 8px 0px rgba(34, 60, 80, 0.2)" }} severity="info">
+          <Alert  style={{ position: "fixed", top: "12%", right: "5%", background: "white",  boxShadow: "4px 4px 8px 0px rgba(34, 60, 80, 0.2)" }} severity="info">
             {state.message}
           </Alert>
         </Snackbar>
