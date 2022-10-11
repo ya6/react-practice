@@ -1,15 +1,24 @@
 import { useState } from "react";
 
 import { useAppState } from "../../state/app-state";
+import useSaveUserWord from "../../helpers/hooks/useSaveUserWord";
 
 import { Box, TextField, Typography, Paper, Stack, Button } from "@mui/material";
+import useUserWords from "../../helpers/hooks/useUserWords";
 
 const Check = () => {
   const [candidate, setCandidate] = useState("");
   const [rigthWords, setRightWords] = useState([]);
   const [wrongWords, setWrongWords] = useState([]);
   const [learned, setLearned] = useState(0);
-  const [{ pageOfWords, group, page, }, dispatch] = useAppState();
+  const [word, setWord] = useState(null);
+
+  const [updateWord, setUpdateWord] = useState(null);
+
+  const [{ pageOfWords, group, page, userWords }, dispatch] = useAppState();
+  const [serverAnswer, isLoading] = useSaveUserWord(word);
+
+  useUserWords();
 
   const changeHandler = (e) => {
     setCandidate(e.target.value);
@@ -27,6 +36,14 @@ const Check = () => {
     } else if (!rigthWords.includes(candidate)) {
       setLearned(learned + 1);
       setRightWords([...rigthWords, candidate]);
+
+      if (userWords.find((el) => el.optional.word.word === candidate)) {
+        //TODO update
+        console.log("updete-->", pageOfWords[idx]);
+      } else {
+        //  save ok
+        setWord(pageOfWords[idx]);
+      }
     }
     setCandidate("");
   };
@@ -42,13 +59,12 @@ const Check = () => {
             {`Total: ${pageOfWords.length}`}
           </Typography>
           <Stack direction="row">
-
-          <Typography style={{ color: "gray" }} variant="body2">
-            {`Group: ${group+1}`}
-          </Typography>
-          <Typography style={{ color: "gray" }} variant="body2" ml={1}>
-            {`Page: ${page+1}`}
-          </Typography>
+            <Typography style={{ color: "gray" }} variant="body2">
+              {`Group: ${group + 1}`}
+            </Typography>
+            <Typography style={{ color: "gray" }} variant="body2" ml={1}>
+              {`Page: ${page + 1}`}
+            </Typography>
           </Stack>
           <Typography style={{ color: "gray" }} variant="subtitle2">
             {`Learned: ${learned}`}

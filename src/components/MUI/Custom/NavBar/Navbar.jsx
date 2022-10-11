@@ -9,7 +9,7 @@ import { AppBar, Box, Toolbar, Typography, Menu, MenuItem, Container, Avatar, Bu
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
-import { Login } from "@mui/icons-material";
+// import { Login } from "@mui/icons-material";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -148,7 +148,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title={ isAuth ? "Open settings" : "Log in"}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar   sx={{ width: 32, height: 32 }} alt="person" src="" />
+                <Avatar   sx={{ width: 32, height: 32, background:`${isAuth ? "#2979ff" : "lightgray"}` }} alt="person" src="" />
               </IconButton>
             </Tooltip>
             <Menu

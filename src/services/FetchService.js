@@ -91,10 +91,10 @@ export default class FetchService {
   static saveUserWord = async (userData, currenWord, wordData) => {
     const url = `${urls.HOST}/users/${userData.userId}/words/${currenWord.id}`;
 
-    const { difficulty, ...rest } = wordData;
+    const { difficulty, status} = wordData;
     const _wordData = {
       difficulty: difficulty,
-      optional: {word: currenWord, ...rest},
+      optional: {word: currenWord, status},
          };
 console.log(_wordData);
     const options = {

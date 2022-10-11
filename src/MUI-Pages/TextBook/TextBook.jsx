@@ -5,6 +5,8 @@ import { useAppState } from "../../state/app-state";
 import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import usePlaySound from "../../helpers/hooks/usePlaySound";
 
+import LoadingFab from "../../components/MUI/Custom/LoadingFub/LoadingFab";
+
 import {
   Box,
   Typography,
@@ -81,14 +83,15 @@ const TextBook = () => {
           <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, sm: 1, md: 1 }}>
             {/* -----List */}
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }} flex={1}>
+            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", background: "#aaa" }} flex={1}>
               {pageOfWords.map((word, idx) => {
-                let background = "#aaa";
-                // if (state.userWords.find((el) => el.wordId === word.id)) {
-                //   background = "#96989A";
-                // }
+                let learnedBbackground = "#aaa";
+                if (state.userWords.find((el) => el.wordId === word.id)) {
+                  console.log("el-->", state.userWords[0].optional);
+                  learnedBbackground = `rgba(0, 77, 64, ${1*0.1})`;
+                }
                 if (idx === currentWordNum) {
-                  background = "#ccc";
+                  learnedBbackground = "#ccc";
                 }
 
                 return (
@@ -97,7 +100,7 @@ const TextBook = () => {
                     variant="contained"
                     style={{
                       flex: 1,
-                      background: `${background}`,
+                      background: `${learnedBbackground}`,
                       textTransform: "none",
                       borderRadius: "0",
                       minWidth: "max-content",
@@ -134,6 +137,8 @@ const TextBook = () => {
                     <Box component="span" style={{ fontSize: "1.6rem", fontWeight: "400", color: "#aaa", margin: "0 0.5rem" }}>
                       {pageOfWords[currentWordNum].transcription}
                     </Box>
+                    {/* LoadingSound */}
+
                     <Fab
                       style={{ display: "inline block", marginTop: "-5px", boxShadow: "none", marginLeft: "0.5rem" }}
                       size="small"
@@ -168,6 +173,8 @@ const TextBook = () => {
                     >
                       <VolumeUpOutlinedIcon />
                     </Fab>
+
+                    {/* <LoadingFab  setSoudUrl={setSoudUrl}  soundUrl =  {`${urls.HOST}/${pageOfWords[currentWordNum].audioMeaning}`} isloadingSound ={isloadingSound} /> */}
                   </Box>
                   {/* data-extMeaning-translate */}
                   <Box

@@ -6,7 +6,7 @@ const SigninTabs = ({ children }) => {
   const { activeIndex, setActiveIndex } = useContext(TabsContext);
 
   return (
-    <Paper style={{ margin: "3rem auto", padding: "2rem" }}>
+    <Paper style={{ margin: "3rem auto", padding: "2rem", maxWidth:"500px" }}>
       <Stack direction="row" style={{ display: "flex" }}>
         {Children.toArray(children).map((child, idx) => {
           return (

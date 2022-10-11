@@ -41,7 +41,7 @@ export const pages = [
 
 ];
 
-export const version = "0.1.7";
+export const version = "0.1.8";
 
 export const levels = {
   "Group 1": 0,
