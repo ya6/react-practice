@@ -4,9 +4,12 @@ import { useAppState } from "../../state/app-state";
 
 
 const useUserWords = () => {
-  const [userWords, setUserWords] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  //Lazy
   const [state, dispatch] = useAppState();
+  const setLoading = () => (state.isAuth ? true : false)
+
+  const [userWords, setUserWords] = useState([]);
+  const [isLoading, setIsLoading] = useState(setLoading());
 
   useEffect(() => {
     let isCurrent = true;
@@ -16,14 +19,15 @@ const useUserWords = () => {
           setUserWords(data);
           setIsLoading(false);
           dispatch({ type: "LOAD_USER_WORDS", userWords:  data}); 
+         
         }
       });
     }
     return () => {
-      setIsLoading(true);
+      //  setIsLoading(true);
       isCurrent = false;
     };
-  }, [state.isAuth, state.userWordsTotal]);
+  }, [state.isAuth, state.userWordsTotal ]);
   return [userWords, isLoading];
 };
 export default useUserWords;

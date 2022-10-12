@@ -41,7 +41,7 @@ export const pages = [
 
 ];
 
-export const version = "0.1.8";
+export const version = "0.1.9";
 
 export const levels = {
   "Group 1": 0,
@@ -74,3 +74,5 @@ export const title = {
   PUT_TO_LERN: "Put To Lern List",
   TO_CHECK: "Check knowledge"
 }
+export const STEP = 0.025
+export const LIMIT = 0.3

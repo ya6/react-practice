@@ -1,11 +1,11 @@
-import { urls, route, levels, title, dictionary } from "../../config/config";
+import { urls, route, levels, title, dictionary, STEP, LIMIT } from "../../config/config";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppState } from "../../state/app-state";
 import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import usePlaySound from "../../helpers/hooks/usePlaySound";
+import useUserWords from "../../helpers/hooks/useUserWords";
 
-import LoadingFab from "../../components/MUI/Custom/LoadingFub/LoadingFab";
 
 import {
   Box,
@@ -28,12 +28,15 @@ const TextBook = () => {
   //lazy
   const getGroup = () => Number(window.localStorage.getItem("group")) || 0;
   const getPage = () => Number(window.localStorage.getItem("page")) + 1 || 1;
+  const [{isAuth, userWords}, dispatch] = useAppState();
+  
   const [group, setGroup] = useState(getGroup);
   const [currentPageNum, setCurrentPageNum] = useState(getPage);
   const [currentWordNum, setCurrentWordNum] = useState(0);
   const [seeTranslate, setSeeTranslate] = useState(false);
+  const [_, isLoading_UserWords] = useUserWords();
+ 
 
-  const [state, dispatch] = useAppState();
 
   const [setSoudUrl] = usePlaySound();
 
@@ -47,6 +50,7 @@ const TextBook = () => {
     dispatch({ type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords });
     navigate(route.CHECK);
   };
+  // console.log('status--->',state.userWords[0].optional.status);
   return (
     <Box>
       <Typography m={3} variant="h6">
@@ -77,21 +81,25 @@ const TextBook = () => {
             );
           })}
         </BottomNavigation>
-        {isLoading ? (
+        
+        {(!isAuth && isLoading) || (isAuth && isLoading && isLoading_UserWords ) ? (
           <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "48%", zIndex: 1000 }} />
         ) : (
           <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, sm: 1, md: 1 }}>
             {/* -----List */}
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", background: "#aaa" }} flex={1}>
+            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", background: "transparent" }} flex={1}>
               {pageOfWords.map((word, idx) => {
-                let learnedBbackground = "#aaa";
-                if (state.userWords.find((el) => el.wordId === word.id)) {
-                  console.log("el-->", state.userWords[0].optional);
-                  learnedBbackground = `rgba(0, 77, 64, ${1*0.1})`;
+                let learnedBbackground = "rgb(0, 77, 64)";
+                const rez = userWords.find((el) => el.wordId === word.id)
+                if (rez) {
+                  let opas = 1 - (rez.optional.status * STEP)
+                  opas = (opas > LIMIT) ? opas : LIMIT 
+                  learnedBbackground=`rgba(0, 77, 64, ${opas})`
                 }
+              
                 if (idx === currentWordNum) {
-                  learnedBbackground = "#ccc";
+                  learnedBbackground = "green";
                 }
 
                 return (

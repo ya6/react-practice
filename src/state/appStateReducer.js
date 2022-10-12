@@ -31,7 +31,7 @@ const appStateReducer = (state, action) => {
       return { ...state, message: action.message || messages.UPS };
     }
     case "NOTIF_USER_LOGIN_FAIL": {
-      return { ...state, message: action.message || messages.UPS };
+      return { ...state, message: action.message || messages.UPS };tUpdateWord
     }
 
     case "NOTIF_START_USER_LOGIN": {
@@ -52,6 +52,10 @@ const appStateReducer = (state, action) => {
 
     case "ADD_USER_WORD": {
       return { ...state, userWordsTotal: state.userWordsTotal+1, message: `add word: ${action.message}`};
+    }
+
+    case "UPDATE_USER_WORD": {
+      return { ...state, userWordsTotal: state.userWordsTotal+1, message: `update word: ${action.message}`};
     }
 
     case "SET_CURRENT_WORDS_PAGE": {

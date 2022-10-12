@@ -58,7 +58,6 @@ export default class FetchService {
     //   setStateFunc(data);
     // }, 2000);
 
-
     setStateFunc(data);
   };
 
@@ -67,7 +66,7 @@ export default class FetchService {
     // console.time("fetch-time");
     const data = await FetchService.fetcher(url);
     // console.timeEnd("fetch-time");
-    
+
     return data;
   };
 
@@ -89,16 +88,27 @@ export default class FetchService {
   };
 
   static saveUserWord = async (userData, currenWord, wordData) => {
+    const data = await FetchService.serveUserWord(userData, currenWord, wordData, "POST");
+
+    return data;
+  };
+
+  static updateUserWord = async (userData, currenWord, wordData) => {
+    const data = await FetchService.serveUserWord(userData, currenWord, wordData, "PUT");
+
+    return data;
+  };
+
+  static serveUserWord = async (userData, currenWord, wordData, method) => {
     const url = `${urls.HOST}/users/${userData.userId}/words/${currenWord.id}`;
 
-    const { difficulty, status} = wordData;
+    const { difficulty, status } = wordData;
     const _wordData = {
       difficulty: difficulty,
-      optional: {word: currenWord, status},
-         };
-console.log(_wordData);
+      optional: { word: currenWord, status },
+    };
     const options = {
-      method: "POST",
+      method: method,
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${userData.token}`,

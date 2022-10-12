@@ -19,7 +19,7 @@ const App = () => {
   }, []);
 
   // useAuthFromStorage();
-  useUserWords(); //???
+  // useUserWords();
 
   return <Layout />;
 };

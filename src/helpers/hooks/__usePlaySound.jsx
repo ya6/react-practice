@@ -10,30 +10,30 @@ const usePlaySound = () => {
       setIsloading(true)
       const playdAudio = async (url) => {
         const audio = new Audio(url)
-    
-         
-            const playPromise = audio.play()
-            if (playPromise !== undefined) {
-              playPromise
-                .then((_) => {
-                  audio.currentTime = 0
-                  audio.play()
-                  console.log('go');
-                  setIsloading(false)
-                })
-                .catch((error) => {
-                 Alert("sound load error")
-                })
-            }
-        
-          };
-          
-          setTimeout(()=> {
-            playdAudio(soundUrl);
-      
-          }, 3000)
-  
-   
+
+
+        const playPromise = audio.play()
+        if (playPromise !== undefined) {
+          playPromise
+            .then((_) => {
+              audio.currentTime = 0
+              audio.play()
+
+              setIsloading(false)
+            })
+            .catch((error) => {
+              Alert("sound load error")
+            })
+        }
+
+      };
+
+      setTimeout(() => {
+        playdAudio(soundUrl);
+
+      }, 3000)
+
+
     }
 
     return () => {

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useAppState } from "../../state/app-state";
 import useSaveUserWord from "../../helpers/hooks/useSaveUserWord";
+import useUpdateUserWord from "../../helpers/hooks/useUpdateUserWord";
 
 import { Box, TextField, Typography, Paper, Stack, Button } from "@mui/material";
 import useUserWords from "../../helpers/hooks/useUserWords";
@@ -17,6 +18,7 @@ const Check = () => {
 
   const [{ pageOfWords, group, page, userWords }, dispatch] = useAppState();
   const [serverAnswer, isLoading] = useSaveUserWord(word);
+  const [serverAnswer1, isLoading1] = useUpdateUserWord(updateWord);
 
   useUserWords();
 
@@ -38,10 +40,10 @@ const Check = () => {
       setRightWords([...rigthWords, candidate]);
 
       if (userWords.find((el) => el.optional.word.word === candidate)) {
-        //TODO update
-        console.log("updete-->", pageOfWords[idx]);
+        //  update
+        setUpdateWord(userWords.find((el) => el.optional.word.word === candidate));
       } else {
-        //  save ok
+        //  save
         setWord(pageOfWords[idx]);
       }
     }
