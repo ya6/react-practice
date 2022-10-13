@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 import { useAppState } from "../../state/app-state";
 import FetchService from "../../services/FetchService";
-import StorageService from "../../services/StorageService"
+import StorageService from "../../services/StorageService";
 
 const usePageOftWords = (group = 0, page = 0) => {
   const [onePage, setOnePage] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [state, dispatch] = useAppState()
+  const [state, dispatch] = useAppState();
   useEffect(() => {
     let isCurrent = true;
-     FetchService.loadPageOfWords(group, page).then((data) => {
+    FetchService.loadPageOfWords(group, page).then((data) => {
       if (isCurrent) {
-        setOnePage(data);
+        //add order for DnD
+        setOnePage(data.map((word, idx) => ({ ...word, order: idx })));
         setIsLoading(false);
-        dispatch({type: "WRITE_GROUP_PAGE", group, page})
-        StorageService.saveItem("group", group)
-        StorageService.saveItem("page", page)
-
+        dispatch({ type: "WRITE_GROUP_PAGE", group, page });
+        StorageService.saveItem("group", group);
+        StorageService.saveItem("page", page);
       }
     });
     return () => {
@@ -25,6 +25,6 @@ const usePageOftWords = (group = 0, page = 0) => {
       isCurrent = false;
     };
   }, [group, page]);
-  return [onePage, isLoading];
+  return [onePage, isLoading, setOnePage];
 };
 export default usePageOftWords;
