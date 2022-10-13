@@ -12,6 +12,7 @@ const Repeat = () => {
   const [current, setCurrent] = useState(null);
 
   const dragStartHandler = (e, el) => {
+    console.log('start->', el);
     setCurrent(el);
   };
 
@@ -27,6 +28,7 @@ const Repeat = () => {
   const dragEndHandler = (e) => {};
 
   const DropHandler = (e, el) => {
+    console.log('drop->', el);
     e.preventDefault();
     const _list = list.map((word) => {
       let _word = word;
@@ -34,6 +36,7 @@ const Repeat = () => {
       if (word.id === current.id) _word = { ...word, order: el.order };
       return _word;
     });
+    console.log(_list);
     e.target.style.background = "green";
     setList(_list.sort((a, b) => a.order > b.order));
   };
