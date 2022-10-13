@@ -41,12 +41,12 @@ export const pages = [
 
 ];
 
-export const version = "0.1.11";
+export const version = "0.1.12";
 
 export const levels = {
   "Group 1": 0,
   "Group 2": 1,
-   "Group 3": 2 ,
+  "Group 3": 2 ,
   "Group 4": 3,
   "Group 5": 4,
   "Group 6": 5
