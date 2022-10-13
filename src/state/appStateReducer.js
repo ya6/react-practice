@@ -5,7 +5,7 @@ const appStateReducer = (state, action) => {
   switch (action.type) {
     //--------------------------------USER LOGING FROM STORAGE
     case "AUTH_FROM_STORAGE": {
-      return { ...state, userData: action.userData, userName: action.userData.name, isAuth: true, message: messages.W_BACK };
+      return { ...state, userData: action.userData, userName: action.userData.name, isAuth: true, message: `${action.userData.name}, ${messages.W_BACK}`};
     }
 
 

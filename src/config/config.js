@@ -63,7 +63,7 @@ export const messages = {
   PROCESSING: "processing...",
   UPS: "Ups...",
   REGISTERED: "You are registered",
-  W_BACK: "Welcome back"
+  W_BACK: "welcome back!"
 }
 
 export const wordStatus = {

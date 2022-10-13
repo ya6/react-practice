@@ -32,7 +32,7 @@ const Check = () => {
     if (!candidate) {
       return;
     }
-    const idx = pageOfWords.findIndex((el) => el.word.toLowerCase() === candidate.toLowerCase());
+    const idx = pageOfWords.findIndex((el) => el.word === candidate);
     if (idx == -1) {
       setWrongWords([...wrongWords, candidate]);
     } else if (!rigthWords.includes(candidate)) {

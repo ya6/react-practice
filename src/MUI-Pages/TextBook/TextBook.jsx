@@ -82,9 +82,7 @@ const TextBook = () => {
           })}
         </BottomNavigation>
         
-        {(!isAuth && isLoading) || (isAuth && isLoading && isLoading_UserWords ) ? (
-          <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "48%", zIndex: 1000 }} />
-        ) : (
+        {(!isLoading && !isLoading_UserWords ) ? (
           <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, sm: 1, md: 1 }}>
             {/* -----List */}
 
@@ -127,7 +125,7 @@ const TextBook = () => {
               <Stack direction={{ md: "row", sm: "column" }} alignItems="center" spacing={1} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
                 <Box
                   sx={{
-                    backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`,
+                    backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`, 
                     backgroundSize: "cover",
                     backgroundPosition: "center",
 
@@ -249,7 +247,11 @@ const TextBook = () => {
               </Box>
             </Box>
           </Stack>
-        )}
+        ) : 
+        (
+          <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "45%", zIndex: 1000 }} />
+        )
+        }
 
         <Stack sx={{ border: "1px solid tranparent" }} direction="row" justifyContent="center" alignItems="center" padding={2}>
           <Pagination

@@ -18,7 +18,7 @@ const App = () => {
     navigate(route.TEXTBOOK);
   }, []);
 
-  // useAuthFromStorage();
+  useAuthFromStorage();
   // useUserWords();
 
   return <Layout />;
