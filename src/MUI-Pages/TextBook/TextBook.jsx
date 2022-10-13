@@ -6,7 +6,6 @@ import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import usePlaySound from "../../helpers/hooks/usePlaySound";
 import useUserWords from "../../helpers/hooks/useUserWords";
 
-
 import {
   Box,
   Typography,
@@ -28,19 +27,18 @@ const TextBook = () => {
   //lazy
   const getGroup = () => Number(window.localStorage.getItem("group")) || 0;
   const getPage = () => Number(window.localStorage.getItem("page")) + 1 || 1;
-  const [{isAuth, userWords}, dispatch] = useAppState();
-  
+  const [{ isAuth, userWords }, dispatch] = useAppState();
+
   const [group, setGroup] = useState(getGroup);
   const [currentPageNum, setCurrentPageNum] = useState(getPage);
   const [currentWordNum, setCurrentWordNum] = useState(0);
   const [seeTranslate, setSeeTranslate] = useState(false);
+  const [current, setCurrent] = useState(null);
   const [_, isLoading_UserWords] = useUserWords();
- 
-
 
   const [setSoudUrl] = usePlaySound();
 
-  const [pageOfWords, isLoading] = usePageOfWords(group, currentPageNum - 1);
+  const [pageOfWords, isLoading, setPageOfWords] = usePageOfWords(group, currentPageNum - 1);
 
   const handleChange = (e, value) => {
     setCurrentPageNum(value);
@@ -50,7 +48,42 @@ const TextBook = () => {
     dispatch({ type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords });
     navigate(route.CHECK);
   };
-  // console.log('status--->',state.userWords[0].optional.status);
+ 
+  // DnD
+  const dragStartHandler = (e, word) => {
+    setCurrent(word);
+  };
+
+  const dragLeaveHandler = (e) => {
+  };
+
+  const dragOverHandler = (e) => {
+    e.preventDefault();
+     };
+
+  const dragEndHandler = (e) => {};
+
+  const DropHandler = (e, word) => {
+    e.preventDefault();
+    const _pageOfWords = pageOfWords.map((w) => {
+      let _word = w;
+      if (w.id === word.id) _word = { ...w, order: current.order };
+      if (w.id === current.id) _word = { ...w, order: word.order };
+      return _word;
+    });
+
+   
+
+    setPageOfWords(
+      _pageOfWords.sort((a, b) => {
+        const s = a.order > b.order ? 1 : -1;
+        return s;
+      })
+    );
+  };
+  // DnD
+
+
   return (
     <Box>
       <Typography m={3} variant="h6">
@@ -81,41 +114,49 @@ const TextBook = () => {
             );
           })}
         </BottomNavigation>
-        
-        {(!isLoading && !isLoading_UserWords ) ? (
+
+        {!isLoading && !isLoading_UserWords ? (
           <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, sm: 1, md: 1 }}>
             {/* -----List */}
 
             <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", background: "transparent" }} flex={1}>
               {pageOfWords.map((word, idx) => {
                 let learnedBbackground = "rgb(0, 77, 64)";
-                const rez = userWords.find((el) => el.wordId === word.id)
+                const rez = userWords.find((el) => el.wordId === word.id);
                 if (rez) {
-                  let opas = 1 - (rez.optional.status * STEP)
-                  opas = (opas > LIMIT) ? opas : LIMIT 
-                  learnedBbackground=`rgba(0, 77, 64, ${opas})`
+                  let opas = 1 - rez.optional.status * STEP;
+                  opas = opas > LIMIT ? opas : LIMIT;
+                  learnedBbackground = `rgba(0, 77, 64, ${opas})`;
                 }
-              
+
                 if (idx === currentWordNum) {
                   learnedBbackground = "green";
                 }
 
                 return (
-                  <Button
+                  <Box
                     onClick={() => setCurrentWordNum(idx)}
-                    variant="contained"
-                    style={{
+                    draggable={true}
+                    onDragStart={(e) => dragStartHandler(e, word)}
+                    onDragLeave={dragLeaveHandler}
+                    onDragOver={dragOverHandler}
+                    onDragEnd={dragEndHandler}
+                    onDrop={(e) => DropHandler(e, word)}
+                    sx={{
                       flex: 1,
                       background: `${learnedBbackground}`,
-                      textTransform: "none",
-                      borderRadius: "0",
-                      minWidth: "max-content",
-                      boxShadow: "none",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "1.0rem 1.0rem",
+                      color: "white",
+                      userSelect: "none",
+                      "&:hover": {cursor: "grab"}
                     }}
                     key={idx}
                   >
-                    {word.word}
-                  </Button>
+                    <Box>{word.word}</Box>
+                  </Box>
                 );
               })}
             </Box>
@@ -125,7 +166,7 @@ const TextBook = () => {
               <Stack direction={{ md: "row", sm: "column" }} alignItems="center" spacing={1} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
                 <Box
                   sx={{
-                    backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`, 
+                    backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
 
@@ -247,11 +288,9 @@ const TextBook = () => {
               </Box>
             </Box>
           </Stack>
-        ) : 
-        (
+        ) : (
           <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "45%", zIndex: 1000 }} />
-        )
-        }
+        )}
 
         <Stack sx={{ border: "1px solid tranparent" }} direction="row" justifyContent="center" alignItems="center" padding={2}>
           <Pagination
