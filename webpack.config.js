@@ -81,6 +81,7 @@ const config = {
       },
     },
   },
+  
 };
 
 module.exports = () => {

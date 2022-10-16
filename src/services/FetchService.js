@@ -48,6 +48,20 @@ export default class FetchService {
     setStateFunc(data);
   };
 
+  static getUserTokens = async (userId, token) => {
+    const url = `${urls.HOST}/users/${userId}/tokens`;
+    const options = {
+      method: "GET",
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    };
+    const data = await FetchService.fetcher(url, options);
+    return data;
+  };
+
   //--------WORDS
 
   static loadFirstWords = async (setStateFunc) => {
@@ -64,6 +78,7 @@ export default class FetchService {
   static loadPageOfWords = async (group = 0, page = 0) => {
     const url = `${urls.HOST}/${urls.PATH_NAME_WORDS}?group=${group}&page=${page}`;
     // console.time("fetch-time");
+
     const data = await FetchService.fetcher(url);
     // console.timeEnd("fetch-time");
 

@@ -164,97 +164,8 @@ const TextBook = () => {
             {/* -----CARD */}
             <Box flex={2}>
               <Stack direction={{ md: "row", sm: "column" }} alignItems="center" spacing={1} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
-                <Box
-                  sx={{
-                    backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-
-                    height: 170,
-                    width: 200,
-                  }}
-                />
-                {/* word block */}
-                <Box>
-                  {/* data----word----- */}
-                  <Box sx={{ mt: "1rem" }}>
-                    <Box component="span" style={{ fontSize: "2rem", fontWeight: "600" }}>
-                      {pageOfWords[currentWordNum].word}
-                    </Box>
-                    <Box component="span" style={{ fontSize: "1.6rem", fontWeight: "400", color: "#aaa", margin: "0 0.5rem" }}>
-                      {pageOfWords[currentWordNum].transcription}
-                    </Box>
-                    {/* LoadingSound */}
-
-                    <Fab
-                      style={{ display: "inline block", marginTop: "-5px", boxShadow: "none", marginLeft: "0.5rem" }}
-                      size="small"
-                      color="lightgray"
-                      aria-label=""
-                      onClick={() => {
-                        setSoudUrl(`${urls.HOST}/${pageOfWords[currentWordNum].audio}`);
-                      }}
-                    >
-                      <VolumeUpOutlinedIcon />
-                    </Fab>
-                  </Box>
-                  {/* data-translate  */}
-                  <Box sx={{ fontSize: "1.3rem", fontFamily: "Roboto", color: `${seeTranslate ? "#aaa" : "transparent"}` }}>
-                    {pageOfWords[currentWordNum].wordTranslate}
-                  </Box>
-                  {/* data-textMeaning */}
-                  <Box>
-                    <Box
-                      component="span"
-                      style={{ fontSize: "1.0rem", lineHeight: "150%" }}
-                      dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textMeaning }}
-                    />
-                    <Fab
-                      style={{ display: "inline block", marginTop: "-5px", boxShadow: "none", marginLeft: "0.5rem" }}
-                      size="small"
-                      color="lightgray"
-                      aria-label=""
-                      onClick={() => {
-                        setSoudUrl(`${urls.HOST}/${pageOfWords[currentWordNum].audioMeaning}`);
-                      }}
-                    >
-                      <VolumeUpOutlinedIcon />
-                    </Fab>
-
-                    {/* <LoadingFab  setSoudUrl={setSoudUrl}  soundUrl =  {`${urls.HOST}/${pageOfWords[currentWordNum].audioMeaning}`} isloadingSound ={isloadingSound} /> */}
-                  </Box>
-                  {/* data-extMeaning-translate */}
-                  <Box
-                    style={{ fontSize: "1.0rem", color: `${seeTranslate ? "#aaa" : "transparent"}` }}
-                    dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textMeaningTranslate }}
-                  />
-                  {/* data-textExample */}
-                  <Box>
-                    <Box
-                      component="span"
-                      style={{ fontSize: "1.0rem", lineHeight: "150%" }}
-                      dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textExample }}
-                    />
-                    <Fab
-                      style={{ display: "inline block", marginTop: "-5px", boxShadow: "none", marginLeft: "0.5rem" }}
-                      size="small"
-                      color="lightgray"
-                      aria-label=""
-                      onClick={() => {
-                        setSoudUrl(`${urls.HOST}/${pageOfWords[currentWordNum].audioExample}`);
-                      }}
-                    >
-                      <VolumeUpOutlinedIcon />
-                    </Fab>
-                  </Box>
-                  {/* data-textExample-translate */}
-                  <Box
-                    style={{ fontSize: "1rem", color: `${seeTranslate ? "#aaa" : "transparent"}` }}
-                    dangerouslySetInnerHTML={{ __html: pageOfWords[currentWordNum].textExampleTranslate }}
-                  />
-                </Box>
-              </Stack>
-              <Box style={{ width: "100%", display: "flex", justifyContent: "space-between", marginTop: "0.5rem" }}>
+               {pageOfWords[currentWordNum] && (
+                <Box style={{ width: "100%", display: "flex", justifyContent: "space-between", marginTop: "0.5rem" }}>
                 <Box>
                   <Button
                     spacing={1}
@@ -286,6 +197,12 @@ const TextBook = () => {
                   </Button>
                 </div>
               </Box>
+
+               )}
+                
+              
+              </Stack>
+              
             </Box>
           </Stack>
         ) : (

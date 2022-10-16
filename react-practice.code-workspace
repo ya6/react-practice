@@ -1,12 +1,13 @@
 {
   "folders": [
-	{
-		"path": "."
-	}
-],
+    {
+      "path": "."
+    },
+    {
+      "path": "../../react-rslang-be"
+    }
+  ],
   "settings": {
-    "marquee.widgets.npm-stats.packageNames": [
-      "my-webpack-project"
-    ]
+    "marquee.widgets.npm-stats.packageNames": ["my-webpack-project"]
   }
 }
