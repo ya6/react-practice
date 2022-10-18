@@ -9,10 +9,15 @@ const Home = () => (
     <h3>Stack</h3>
     <p>Front: Webpack, ReactJS, global state: context-useReducer</p>
     <p>styles: MUI, custom</p>
-    <p>Back: Nodejs, MongoDB. Installed from an existing repository </p>
-    <h3>Goals</h3>
-    <p>Development practice</p>
-    <p>Learn English</p>
+    <p>Back: Nodejs, MongoDB.</p>
+
+    <h3>Learn English</h3>
+    <p>3600 Words</p>
+    <p>Knowledge check</p>
+    <p>Shuffle the words on the page into a logical chain</p>
+    <h4>After registration:</h4>
+    <p>The difference in color after the knowledge test</p>
+   
 
  </div>
   </Container>

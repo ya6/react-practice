@@ -21,10 +21,10 @@ export const pages = [
     route: "/textbook",
   },
 
-  {
-    page: "Repeat List",
-    route: "/repeat",
-  },
+  // {
+  //   page: "Repeat List",
+  //   route: "/repeat",
+  // },
   {
     page: "Statistics",
     route: "/statistics",
@@ -39,7 +39,7 @@ export const pages = [
   },
 ];
 
-export const version = "0.2.1";
+export const version = "0.2.2";
 
 export const levels = {
   "Group 1": 0,
@@ -70,7 +70,7 @@ export const wordStatus = {
 
 export const title = {
   PUT_TO_LERN: "Put To Lern List",
-  TO_CHECK: "Check knowledge",
+  TO_CHECK: "Knowledge check",
 };
 export const STEP = 0.025;
 export const LIMIT = 0.3;
