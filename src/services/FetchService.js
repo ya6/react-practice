@@ -48,6 +48,35 @@ export default class FetchService {
     setStateFunc(data);
   };
 
+  static getUserTokens = async (userId, refreshToken) => {
+    // const url = `${urls.HOST}/users/${userId}/tokens`;
+    const url = `${urls.HOST}/users/${userId}/tokens`;
+    console.log('getUserTokens------->', userId, refreshToken);
+    const options = {
+      method: "GET",
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+        Accept: "application/json",
+      },
+    };
+    const data = await FetchService.fetcher(url, options);
+    return data;
+  };
+
+  // static async getToken(id,  refreshToken ) {
+  //   return load({
+  //     url: `users/${id}/tokens`,
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Authorization': `Bearer ${refreshToken}`,
+  //     },
+  //   });
+  // };
+// }
+
+
   //--------WORDS
 
   static loadFirstWords = async (setStateFunc) => {

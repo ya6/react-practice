@@ -6,7 +6,6 @@ import usePageOfWords from "../../helpers/hooks/usePageOfWords";
 import usePlaySound from "../../helpers/hooks/usePlaySound";
 import useUserWords from "../../helpers/hooks/useUserWords";
 
-
 import {
   Box,
   Typography,
@@ -28,15 +27,13 @@ const TextBook = () => {
   //lazy
   const getGroup = () => Number(window.localStorage.getItem("group")) || 0;
   const getPage = () => Number(window.localStorage.getItem("page")) + 1 || 1;
-  const [{isAuth, userWords}, dispatch] = useAppState();
-  
+  const [{ isAuth, userWords }, dispatch] = useAppState();
+
   const [group, setGroup] = useState(getGroup);
   const [currentPageNum, setCurrentPageNum] = useState(getPage);
   const [currentWordNum, setCurrentWordNum] = useState(0);
   const [seeTranslate, setSeeTranslate] = useState(false);
   const [_, isLoading_UserWords] = useUserWords();
- 
-
 
   const [setSoudUrl] = usePlaySound();
 
@@ -50,8 +47,7 @@ const TextBook = () => {
     dispatch({ type: "SET_CURRENT_WORDS_PAGE", pageOfWords: pageOfWords });
     navigate(route.CHECK);
   };
-  // console.log('status--->',state.userWords[0].optional.status);
-  return (
+   return (
     <Box>
       <Typography m={3} variant="h6">
         TextBook
@@ -81,21 +77,23 @@ const TextBook = () => {
             );
           })}
         </BottomNavigation>
-        
-        {(!isLoading && !isLoading_UserWords ) ? (
+
+        {!isLoading && !isLoading_UserWords ? (
           <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, sm: 1, md: 1 }}>
             {/* -----List */}
 
             <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", background: "transparent" }} flex={1}>
               {pageOfWords.map((word, idx) => {
                 let learnedBbackground = "rgb(0, 77, 64)";
-                const rez = userWords.find((el) => el.wordId === word.id)
-                if (rez) {
-                  let opas = 1 - (rez.optional.status * STEP)
-                  opas = (opas > LIMIT) ? opas : LIMIT 
-                  learnedBbackground=`rgba(0, 77, 64, ${opas})`
+                if (userWords && userWords.length > 0) {
+                  const rez = userWords.find((el) => el.wordId === word.id);
+                  if (rez) {
+                    let opas = 1 - rez.optional.status * STEP;
+                    opas = opas > LIMIT ? opas : LIMIT;
+                    learnedBbackground = `rgba(0, 77, 64, ${opas})`;
+                  }
                 }
-              
+
                 if (idx === currentWordNum) {
                   learnedBbackground = "green";
                 }
@@ -125,7 +123,7 @@ const TextBook = () => {
               <Stack direction={{ md: "row", sm: "column" }} alignItems="center" spacing={1} sx={{ border: "1px solid #ddd", padding: "0.5rem" }}>
                 <Box
                   sx={{
-                    backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`, 
+                    backgroundImage: `url(${urls.HOST}/${pageOfWords[currentWordNum].image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
 
@@ -247,11 +245,9 @@ const TextBook = () => {
               </Box>
             </Box>
           </Stack>
-        ) : 
-        (
+        ) : (
           <CircularProgress thickness={5} sx={{ position: "fixed", top: "40%", left: "45%", zIndex: 1000 }} />
-        )
-        }
+        )}
 
         <Stack sx={{ border: "1px solid tranparent" }} direction="row" justifyContent="center" alignItems="center" padding={2}>
           <Pagination

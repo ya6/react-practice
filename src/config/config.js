@@ -1,5 +1,6 @@
 export const urls = {
-  HOST: "https://rs-lang-be-125.herokuapp.com",
+  HOST: " http://localhost:3000",
+  // HOST: "https://rs-lang-be-125.herokuapp.com",
   PATH_NAME_WORDS: "words",
   PATH_NAME_USERS: "users",
   PATH_NAME_SIGNIN: "signin",
@@ -63,7 +64,8 @@ export const messages = {
   PROCESSING: "processing...",
   UPS: "Ups...",
   REGISTERED: "You are registered",
-  W_BACK: "welcome back!"
+  W_BACK: "welcome back!",
+  REFRESH_TOKENS: "Refresh credentials!"
 }
 
 export const wordStatus = {
@@ -76,3 +78,7 @@ export const title = {
 }
 export const STEP = 0.025
 export const LIMIT = 0.3
+
+export const serverAnsw = {TOKEN_NOT_FAUND: "Token is not found!",
+UNAUTHORIZED: "Unauthorized"}
+

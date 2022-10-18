@@ -20,6 +20,10 @@ const appStateReducer = (state, action) => {
       return {  ...initialAppState, message: messages.L_OUT };
     }
 
+    case "REFRESH_TOKENS": {
+      return { ...state, userData: action.userData, message: messages.L_IN, processing: false, isAuth: true };
+    }
+
     case "NOTIF_START_USER_REGISTRATION": {
       return { ...state, message: messages.PROCESSING, processing: true };
     }
